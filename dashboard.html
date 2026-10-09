@@ -1,122 +1,301 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Dashboard | BIXBERRY FX</title>
-<link rel="stylesheet" href="css/style.css">
-<link rel="stylesheet" href="css/features.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard | BIXBERRY FX</title>
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    :root {
+      --bg: #080b16;
+      --panel: #111729;
+      --border: #27314b;
+      --text: #f3f5ff;
+      --muted: #9aa6c4;
+      --green: #26d99a;
+      --red: #ff627d;
+      --purple: #8b73ff;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: Arial, sans-serif;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    .layout {
+      display: grid;
+      grid-template-columns: 230px minmax(0, 1fr);
+      min-height: 100vh;
+    }
+
+    aside {
+      padding: 25px 16px;
+      background: #0d1222;
+      border-right: 1px solid var(--border);
+    }
+
+    .brand {
+      font-size: 22px;
+      font-weight: 900;
+      color: var(--purple);
+      margin: 0 0 35px;
+    }
+
+    .nav a {
+      display: block;
+      padding: 13px;
+      margin: 5px 0;
+      border-radius: 9px;
+      color: var(--muted);
+    }
+
+    .nav a:hover, .nav a.active {
+      background: #202342;
+      color: white;
+    }
+
+    main { padding: 28px; min-width: 0; }
+
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 15px;
+      flex-wrap: wrap;
+      margin-bottom: 28px;
+    }
+
+    h1 { font-size: 28px; margin: 0 0 8px; }
+    h2 { font-size: 18px; margin-top: 0; }
+    p { color: var(--muted); }
+
+    .badge {
+      background: #18382f;
+      color: var(--green);
+      padding: 9px 12px;
+      border-radius: 20px;
+      font-size: 12px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 16px;
+      margin-bottom: 22px;
+    }
+
+    .card {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      padding: 20px;
+      border-radius: 14px;
+      min-width: 0;
+    }
+
+    .label { color: var(--muted); font-size: 13px; }
+    .value { font-size: 25px; font-weight: 800; margin-top: 12px; overflow-wrap: anywhere; }
+    .green { color: var(--green); }
+    .red { color: var(--red); }
+
+    .columns {
+      display: grid;
+      grid-template-columns: minmax(0, 1.5fr) minmax(260px, 1fr);
+      gap: 18px;
+      margin-bottom: 20px;
+    }
+
+    canvas { width: 100%; height: 280px; display: block; }
+
+    .controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin: 14px 0;
+    }
+
+    select, input, button {
+      background: #0a1020;
+      color: white;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 12px;
+      font: inherit;
+    }
+
+    select, input { max-width: 100%; }
+    input { width: 100%; margin: 7px 0 14px; }
+
+    button { cursor: pointer; font-weight: bold; }
+    button:disabled { opacity: .5; cursor: not-allowed; }
+
+    .buy { background: #123d31; border-color: var(--green); }
+    .sell { background: #401d2a; border-color: var(--red); }
+    .primary { background: #5f4bd8; border-color: #8b73ff; }
+
+    .notice {
+      border: 1px solid #5a4a24;
+      background: #292315;
+      color: #f6d78c;
+      padding: 12px;
+      border-radius: 9px;
+      font-size: 13px;
+      line-height: 1.5;
+      margin-bottom: 20px;
+    }
+
+    .table-wrap { overflow-x: auto; }
+    table { width: 100%; border-collapse: collapse; min-width: 480px; }
+    th, td {
+      padding: 13px 10px;
+      text-align: left;
+      border-bottom: 1px solid var(--border);
+      font-size: 13px;
+    }
+    th { color: var(--muted); }
+
+    .small { font-size: 12px; }
+    .empty { padding: 24px 0; color: var(--muted); }
+
+    @media (max-width: 1000px) {
+      .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .columns { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 650px) {
+      .layout { grid-template-columns: 1fr; }
+      aside { border-right: 0; border-bottom: 1px solid var(--border); }
+      .brand { margin-bottom: 15px; }
+      .nav { display: flex; flex-wrap: wrap; gap: 5px; }
+      .nav a { padding: 9px; margin: 0; }
+      main { padding: 17px; }
+      h1 { font-size: 23px; }
+      .grid { gap: 10px; }
+      .card { padding: 14px; }
+      .value { font-size: 20px; }
+    }
+  </style>
 </head>
-<body class="feature-page">
+<body>
+<div class="layout">
+  <aside>
+    <div class="brand">BIXBERRY FX</div>
+    <nav class="nav">
+      <a class="active" href="dashboard.html">Dashboard</a>
+      <a href="index.html">Home</a>
+      <a href="markets.html">Markets</a>
+      <a href="academy.html">Forex Academy</a>
+    </nav>
+    <p class="small">Guest access · Demo account</p>
+  </aside>
 
-<main class="dashboard-page">
-  <section class="page-heading">
-    <p class="eyebrow">YOUR TRADING SPACE</p>
-    <h1>Trading Dashboard</h1>
-    <p>Welcome to your BIXBERRY FX demo dashboard.</p>
-    <span class="demo-badge">DEMO ACCOUNT · VIRTUAL MONEY</span>
-  </section>
+  <main>
+    <header class="topbar">
+      <div>
+        <h1>Trading Dashboard</h1>
+        <p>Practice your strategy with virtual money.</p>
+      </div>
+      <span class="badge">● DEMO MODE</span>
+    </header>
 
-  <section class="dashboard-stats">
-    <article class="stat-card">
-      <span>Demo Balance</span>
-      <h2 id="dash-balance">$10,000.00</h2>
-      <p>Virtual funds only</p>
-    </article>
-
-    <article class="stat-card">
-      <span>Open Positions</span>
-      <h2 id="dash-positions">0</h2>
-      <p>Demo trades</p>
-    </article>
-
-    <article class="stat-card">
-      <span>Account Type</span>
-      <h2>Practice</h2>
-      <p>Not a real brokerage account</p>
-    </article>
-  </section>
-
-  <section class="dashboard-panel">
-    <div>
-      <p class="eyebrow">GET STARTED</p>
-      <h2>Explore your trading tools</h2>
-      <p>Learn about currency markets and practise with virtual money.</p>
+    <div class="notice">
+      Demo trading only. All balances and trades are simulated. Prices below are
+      illustrative, not live executable forex quotes. No real money is used.
     </div>
 
-    <div class="dashboard-links">
-      <a class="dashboard-link" href="markets.html">
-        <span>📈</span>
-        <div><strong>Forex Markets</strong><p>Explore currency exchange rates.</p></div>
-      </a>
+    <section class="grid">
+      <div class="card">
+        <div class="label">Virtual Balance</div>
+        <div class="value" id="balance">$10,000.00</div>
+      </div>
+      <div class="card">
+        <div class="label">Open Positions</div>
+        <div class="value" id="position-count">0</div>
+      </div>
+      <div class="card">
+        <div class="label">Unrealized P/L</div>
+        <div class="value" id="unrealized">$0.00</div>
+      </div>
+      <div class="card">
+        <div class="label">Equity</div>
+        <div class="value" id="equity">$10,000.00</div>
+      </div>
+    </section>
 
-      <a class="dashboard-link" href="index.html#demo-trading">
-        <span>💱</span>
-        <div><strong>Demo Trading</strong><p>Practise on the homepage simulator.</p></div>
-      </a>
+    <section class="columns">
+      <div class="card">
+        <h2>Illustrative Market Chart</h2>
+        <div class="controls">
+          <select id="chart-pair" aria-label="Chart currency pair">
+            <option>EUR/USD</option>
+            <option>GBP/USD</option>
+            <option>USD/JPY</option>
+          </select>
+          <span class="badge">Simulated prices</span>
+        </div>
+        <canvas id="price-chart" aria-label="Illustrative price chart"></canvas>
+        <p class="small">The chart is generated for practice and does not represent live market data.</p>
+      </div>
 
-      <a class="dashboard-link" href="academy.html">
-        <span>🎓</span>
-        <div><strong>Forex Academy</strong><p>Learn Forex from the beginning.</p></div>
-      </a>
+      <div class="card">
+        <h2>Practice Trade</h2>
+        <label for="pair">Currency pair</label>
+        <select id="pair" style="width:100%">
+          <option value="EUR/USD">EUR/USD</option>
+          <option value="GBP/USD">GBP/USD</option>
+          <option value="USD/JPY">USD/JPY</option>
+        </select>
 
-      <a class="dashboard-link" href="index.html">
-        <span>🏠</span>
-        <div><strong>Home</strong><p>Return to BIXBERRY FX.</p></div>
-      </a>
-    </div>
-  </section>
+        <label for="units">Trade size (base currency units)</label>
+        <input id="units" type="number" min="1" max="100000" step="100" value="1000">
 
-  <section class="dashboard-panel">
-    <p class="eyebrow">TRADING REMINDER</p>
-    <h2>Learn before you trade</h2>
-    <p>Forex trading involves substantial risk. This dashboard is a learning prototype and does not place real trades.</p>
-  </section>
-</main>
+        <p>Illustrative price: <strong id="trade-price">1.08500</strong></p>
+        <div class="controls">
+          <button class="buy" id="buy-button">BUY</button>
+          <button class="sell" id="sell-button">SELL</button>
+        </div>
+        <p class="small">Trades are virtual. This simulator does not model spreads, leverage, or real execution.</p>
+        <button id="reset-button" class="primary">Reset Demo Account</button>
+        <p id="trade-message" role="status" aria-live="polite"></p>
+      </div>
+    </section>
 
-<style>
-.dashboard-page{max-width:1150px;margin:0 auto;padding:45px 22px 80px;color:#f5f5ff}
-.page-heading{margin-bottom:30px}
-.eyebrow{color:#a88bff;font-size:.78rem;letter-spacing:2px;font-weight:700}
-.page-heading h1{font-size:clamp(2rem,5vw,3.4rem);margin:10px 0}
-.page-heading>p:not(.eyebrow){color:#b7b6cb}
-.demo-badge{display:inline-block;margin-top:12px;padding:8px 12px;border:1px solid #7154d8;border-radius:20px;color:#c8baff;font-size:.78rem}
-.dashboard-stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:18px;margin:28px 0}
-.stat-card,.dashboard-panel{background:#15152a;border:1px solid #2d2b49;border-radius:18px;padding:24px;margin-bottom:20px}
-.stat-card span{color:#b7b6cb;font-size:.9rem}
-.stat-card h2{font-size:1.8rem;margin:14px 0 8px;overflow-wrap:anywhere}
-.stat-card p,.dashboard-panel>div>p:not(.eyebrow),.dashboard-link p{color:#aaa9c2;font-size:.9rem;line-height:1.6}
-.dashboard-panel h2{margin-top:8px}
-.dashboard-links{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px;margin-top:24px}
-.dashboard-link{display:flex;align-items:flex-start;gap:14px;padding:17px;background:#1c1b35;border:1px solid #373454;border-radius:13px;text-decoration:none;color:#fff;transition:transform .2s,border-color .2s}
-.dashboard-link:hover{transform:translateY(-3px);border-color:#9b7bff}
-.dashboard-link>span{font-size:1.6rem}
-.dashboard-link strong{display:block;margin-bottom:6px}
-.dashboard-link p{margin:0}
-</style>
+    <section class="card" style="margin-bottom:20px">
+      <h2>Open Positions</h2>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Pair</th><th>Side</th><th>Units</th><th>Entry</th><th>Current</th><th>P/L</th><th>Action</th></tr>
+          </thead>
+          <tbody id="positions">
+            <tr><td colspan="7" class="empty">No open positions. Place a demo trade to begin.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
 
-<script>
-(function(){
-  const balance=document.getElementById("dash-balance");
-  const positions=document.getElementById("dash-positions");
-  if(balance){
-    const saved=localStorage.getItem("bixberryDemoBalance");
-    if(saved && Number.isFinite(Number(saved))){
-      balance.textContent="$"+Number(saved).toLocaleString("en-US",{minimumFractionDigits:2,maximumFractionDigits:2});
-    }
-  }
-  if(positions){
-    const savedPositions=localStorage.getItem("bixberryDemoPositions");
-    if(savedPositions){
-      try{
-        const parsed=JSON.parse(savedPositions);
-        if(Array.isArray(parsed)) positions.textContent=parsed.length;
-      }catch(error){}
-    }
-  }
-})();
-</script>
+    <section class="card">
+      <h2>Trade History</h2>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Pair</th><th>Side</th><th>Units</th><th>Entry</th><th>Exit</th><th>Realized P/L</th></tr>
+          </thead>
+          <tbody id="history">
+            <tr><td colspan="6" class="empty">Your closed demo trades will appear here.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+</div>
 
-  <script type="module" src="js/dashboard-auth.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="js/demo-trading.js"></script>
 </body>
 </html>
