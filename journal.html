@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#080d1b">
+  <title>Trading Journal | BIXBERRY FX</title>
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="icons/icon.svg">
+  <style>
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background: #080d1b;
+      color: #f5f7ff;
+      font-family: Arial, sans-serif;
+    }
+
+    .container {
+      width: min(1100px, 94%);
+      margin: 30px auto;
+    }
+
+    a { color: #c4b5fd; text-decoration: none; }
+
+    .panel, .stat, .trade-card {
+      background: #111a2e;
+      border: 1px solid #293651;
+      border-radius: 14px;
+      padding: 20px;
+      margin-bottom: 18px;
+    }
+
+    h1 { font-size: clamp(28px, 5vw, 42px); }
+    .muted { color: #aab6d3; line-height: 1.6; }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 12px;
+    }
+
+    .stat { margin: 0; }
+    .stat-label { color: #aab6d3; font-size: 13px; }
+    .stat-value { font-size: 24px; font-weight: bold; margin-top: 10px; }
+    .positive { color: #4ade80; }
+    .negative { color: #fb7185; }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      gap: 15px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 7px;
+      color: #cbd5e1;
+      font-size: 14px;
+    }
+
+    input, select, textarea {
+      width: 100%;
+      padding: 12px;
+      border-radius: 8px;
+      border: 1px solid #354363;
+      background: #080d1b;
+      color: white;
+      font: inherit;
+    }
+
+    textarea { min-height: 90px; resize: vertical; }
+
+    button {
+      padding: 12px 16px;
+      border: 0;
+      border-radius: 8px;
+      background: #8b5cf6;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    button:hover { opacity: .86; }
+    .delete { background: #522338; }
+    .trade-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .trade-pair { font-size: 20px; font-weight: bold; }
+    .trade-details { line-height: 1.8; color: #cbd5e1; overflow-wrap: anywhere; }
+    .empty { color: #aab6d3; padding: 15px 0; }
+    .notice { font-size: 13px; color: #aab6d3; }
+  </style>
+</head>
+<body>
+  <main class="container">
+    <a href="index.html">← Back to BIXBERRY FX</a>
+
+    <header class="panel">
+      <p>📒 YOUR PERSONAL TRADING RECORDS</p>
+      <h1>Trading Journal</h1>
+      <p class="muted">
+        Record practice trades, review your decisions, and learn from your
+        results. Your journal is saved in this browser without an account.
+      </p>
+    </header>
+
+    <section class="stats">
+      <article class="stat">
+        <div class="stat-label">Total trades</div>
+        <div class="stat-value" id="totalTrades">0</div>
+      </article>
+      <article class="stat">
+        <div class="stat-label">Winning trades</div>
+        <div class="stat-value positive" id="winningTrades">0</div>
+      </article>
+      <article class="stat">
+        <div class="stat-label">Losing trades</div>
+        <div class="stat-value negative" id="losingTrades">0</div>
+      </article>
+      <article class="stat">
+        <div class="stat-label">Recorded net P/L</div>
+        <div class="stat-value" id="totalPL">0.00</div>
+      </article>
+    </section>
+
+    <section class="panel">
+      <h2>➕ Record a practice trade</h2>
+
+      <form id="tradeForm">
+        <div class="form-grid">
+          <div>
+            <label for="pair">Currency pair</label>
+            <select id="pair" required>
+              <option>EUR/USD</option>
+              <option>GBP/USD</option>
+              <option>USD/KES</option>
+              <option>USD/JPY</option>
+              <option>EUR/GBP</option>
+              <option>AUD/USD</option>
+              <option>USD/CAD</option>
+              <option>USD/CHF</option>
+            </select>
+          </div>
+
+          <div>
+            <label for="direction">Trade direction</label>
+            <select id="direction" required>
+              <option value="BUY">BUY</option>
+              <option value="SELL">SELL</option>
+            </select>
+          </div>
+
+          <div>
+            <label for="entry">Entry price</label>
+            <input id="entry" type="number" step="any" min="0"
+              placeholder="e.g. 1.08500" required>
+          </div>
+
+          <div>
+            <label for="exit">Exit price</label>
+            <input id="exit" type="number" step="any" min="0"
+              placeholder="e.g. 1.09000" required>
+          </div>
+
+          <div>
+            <label for="units">Position size in base-currency units</label>
+            <input id="units" type="number" min="0.000001" step="any"
+              value="1000" required>
+          </div>
+
+          <div>
+            <label for="costs">Estimated costs in quote currency</label>
+            <input id="costs" type="number" min="0" step="any" value="0"
+              required>
+          </div>
+
+          <div>
+            <label for="tradeDate">Trade date</label>
+            <input id="tradeDate" type="date" required>
+          </div>
+
+          <div>
+            <label for="strategy">Strategy</label>
+            <select id="strategy">
+              <option>Price action</option>
+              <option>Support and resistance</option>
+              <option>Trend following</option>
+              <option>Breakout</option>
+              <option>News trading</option>
+              <option>Other</option>
+            </select>
+          </div>
+        </div>
+
+        <p>
+          <label for="notes">Trade notes: Why did you enter? What did you learn?</label>
+          <textarea id="notes" maxlength="2000"
+            placeholder="Record your observations..."></textarea>
+        </p>
+
+        <button type="submit">Save Practice Trade</button>
+        <p id="formMessage" class="notice" aria-live="polite"></p>
+      </form>
+    </section>
+
+    <section class="panel">
+      <h2>📈 Your trade history</h2>
+      <p class="muted">
+        Profit and loss is estimated in the pair's quote currency, before
+        any unrecorded fees, slippage, financing, or currency conversion.
+      </p>
+      <div id="tradeList"></div>
+    </section>
+
+    <section class="panel">
+      <h3>⚠️ Educational use only</h3>
+      <p class="muted">
+        This journal does not place trades or connect to a broker. Results
+        are estimates based on the prices and position sizes you enter.
+        Forex trading involves substantial risk.
+      </p>
+    </section>
+  </main>
+
+  <script>
+    const STORAGE_KEY = "bixberry-fx-journal-v1";
+    const form = document.getElementById("tradeForm");
+    const list = document.getElementById("tradeList");
+    const message = document.getElementById("formMessage");
+
+    document.getElementById("tradeDate").value =
+      new Date().toLocaleDateString("en-CA");
+
+    let trades = loadTrades();
+
+    function loadTrades() {
+      try {
+        const value = JSON.parse(localStorage.getItem(STORAGE_KEY));
+        return Array.isArray(value) ? value.filter(isValidTrade) : [];
+      } catch {
+        return [];
+      }
+    }
+
+    function isValidTrade(trade) {
+      return trade && typeof trade.id === "string" &&
+        typeof trade.pair === "string" &&
+        ["BUY", "SELL"].includes(trade.direction) &&
+        Number.isFinite(trade.entry) && trade.entry > 0 &&
+        Number.isFinite(trade.exit) && trade.exit > 0 &&
+        Number.isFinite(trade.units) && trade.units > 0 &&
+        Number.isFinite(trade.costs) && trade.costs >= 0 &&
+        Number.isFinite(trade.pl) &&
+        typeof trade.date === "string";
+    }
+
+    function saveTrades() {
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(trades));
+        return true;
+      } catch {
+        message.textContent =
+          "Could not save your journal. Check your browser storage settings.";
+        return false;
+      }
+    }
+
+    function calculatePL(trade) {
+      const difference = trade.direction === "BUY"
+        ? trade.exit - trade.entry
+        : trade.entry - trade.exit;
+
+      return difference * trade.units - trade.costs;
+    }
+
+    function money(value) {
+      return value.toLocaleString(undefined, {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 5
+      });
+    }
+
+    function makeElement(tag, className, content) {
+      const element = document.createElement(tag);
+      if (className) element.className = className;
+      if (content !== undefined) element.textContent = content;
+      return element;
+    }
+
+    function render() {
+      const wins = trades.filter(trade => trade.pl > 0).length;
+      const losses = trades.filter(trade => trade.pl < 0).length;
+      const total = trades.reduce((sum, trade) => sum + trade.pl, 0);
+
+      document.getElementById("totalTrades").textContent = trades.length;
+      document.getElementById("winningTrades").textContent = wins;
+      document.getElementById("losingTrades").textContent = losses;
+
+      const totalPL = document.getElementById("totalPL");
+      totalPL.textContent = money(total);
+      totalPL.className = "stat-value " +
+        (total > 0 ? "positive" : total < 0 ? "negative" : "");
+
+      list.replaceChildren();
+
+      if (trades.length === 0) {
+        list.appendChild(makeElement(
+          "p", "empty", "No trades recorded yet. Add your first practice trade above!"
+        ));
+        return;
+      }
+
+      [...trades].reverse().forEach(trade => {
+        const card = makeElement("article", "trade-card");
+        const header = makeElement("div", "trade-header");
+        const pair = makeElement(
+          "div", "trade-pair", trade.pair + " · " + trade.direction
+        );
+        const result = makeElement(
+          "strong",
+          trade.pl > 0 ? "positive" : trade.pl < 0 ? "negative" : "",
+          (trade.pl > 0 ? "+" : "") + money(trade.pl) + " " +
+          trade.pair.split("/")[1]
+        );
+
+        header.append(pair, result);
+
+        const details = makeElement("div", "trade-details");
+        details.appendChild(makeElement(
+          "div", "", "Date: " + trade.date
+        ));
+        details.appendChild(makeElement(
+          "div", "", "Entry: " + trade.entry + " · Exit: " + trade.exit
+        ));
+        details.appendChild(makeElement(
+          "div", "", "Position size: " + trade.units + " units"
+        ));
+        details.appendChild(makeElement(
+          "div", "", "Estimated costs: " + money(trade.costs) + " " +
+          trade.pair.split("/")[1]
+        ));
+        details.appendChild(makeElement(
+          "div", "", "Strategy: " + trade.strategy
+        ));
+
+        if (trade.notes) {
+          details.appendChild(makeElement(
+            "p", "", "Notes: " + trade.notes
+          ));
+        }
+
+        const remove = makeElement("button", "delete", "Delete trade");
+        remove.type = "button";
+        remove.addEventListener("click", () => {
+          if (!confirm("Delete this journal entry?")) return;
+          trades = trades.filter(item => item.id !== trade.id);
+          if (saveTrades()) render();
+        });
+
+        card.append(header, details, remove);
+        list.appendChild(card);
+      });
+    }
+
+    form.addEventListener("submit", event => {
+      event.preventDefault();
+
+      const trade = {
+        id: (crypto.randomUUID
+          ? crypto.randomUUID()
+          : Date.now().toString() + Math.random().toString(16).slice(2)),
+        pair: document.getElementById("pair").value,
+        direction: document.getElementById("direction").value,
+        entry: Number(document.getElementById("entry").value),
+        exit: Number(document.getElementById("exit").value),
+        units: Number(document.getElementById("units").value),
+        costs: Number(document.getElementById("costs").value),
+        date: document.getElementById("tradeDate").value,
+        strategy: document.getElementById("strategy").value,
+        notes: document.getElementById("notes").value.trim()
+      };
+
+      if (!trade.date || !Number.isFinite(trade.entry) ||
+          !Number.isFinite(trade.exit) || !Number.isFinite(trade.units) ||
+          !Number.isFinite(trade.costs) || trade.entry <= 0 ||
+          trade.exit <= 0 || trade.units <= 0 || trade.costs < 0) {
+        message.textContent = "Please enter valid prices, size, costs, and date.";
+        return;
+      }
+
+      trade.pl = calculatePL(trade);
+      trades.push(trade);
+
+      if (!saveTrades()) {
+        trades.pop();
+        return;
+      }
+
+      form.reset();
+      document.getElementById("tradeDate").value =
+        new Date().toLocaleDateString("en-CA");
+      document.getElementById("units").value = "1000";
+      document.getElementById("costs").value = "0";
+      message.textContent = "Practice trade saved successfully!";
+      render();
+    });
+
+    render();
+
+    if ("serviceWorker" in navigator) {
+      window.addEventListener("load", () => {
+        navigator.serviceWorker.register("./sw.js").catch(() => {});
+      });
+    }
+  </script>
+</body>
+</html>
