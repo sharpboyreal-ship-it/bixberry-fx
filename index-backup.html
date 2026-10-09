@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="BIXBERRY FX — Explore currency markets, practice demo trading, and learn forex trading.">
+  <title>BIXBERRY FX | Explore the Markets</title>
+
+  <style>
+    :root {
+      --bg: #080b16;
+      --panel: #111729;
+      --border: #27314b;
+      --text: #f3f5ff;
+      --muted: #9aa6c4;
+      --purple: #8b73ff;
+      --green: #26d99a;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: Arial, sans-serif;
+    }
+
+    a { text-decoration: none; color: inherit; }
+
+    header {
+      padding: 20px 6%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      flex-wrap: wrap;
+      border-bottom: 1px solid var(--border);
+      background: #0d1222;
+    }
+
+    .brand {
+      font-size: 24px;
+      font-weight: 900;
+      letter-spacing: 1px;
+      color: var(--purple);
+    }
+
+    nav {
+      display: flex;
+      gap: 22px;
+      flex-wrap: wrap;
+    }
+
+    nav a { color: var(--muted); }
+    nav a:hover { color: white; }
+
+    .hero {
+      max-width: 1250px;
+      margin: auto;
+      padding: 85px 25px 65px;
+      display: grid;
+      grid-template-columns: 1.2fr .8fr;
+      align-items: center;
+      gap: 45px;
+    }
+
+    .eyebrow {
+      color: var(--green);
+      font-size: 13px;
+      font-weight: bold;
+      letter-spacing: 2px;
+    }
+
+    h1 {
+      font-size: clamp(38px, 6vw, 66px);
+      line-height: 1.08;
+      margin: 20px 0;
+    }
+
+    h1 span { color: var(--purple); }
+
+    p {
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    .hero-copy > p {
+      max-width: 620px;
+      font-size: 17px;
+    }
+
+    .buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 13px;
+      margin-top: 30px;
+    }
+
+    .button {
+      display: inline-block;
+      padding: 14px 20px;
+      border: 1px solid var(--border);
+      border-radius: 9px;
+      font-weight: bold;
+      transition: transform .2s, opacity .2s;
+    }
+
+    .button:hover { transform: translateY(-2px); }
+
+    .primary {
+      background: #5f4bd8;
+      border-color: var(--purple);
+    }
+
+    .secondary { background: var(--panel); }
+
+    .hero-panel {
+      background: linear-gradient(145deg, #171d36, #0e1425);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 26px;
+      box-shadow: 0 20px 70px rgba(0,0,0,.25);
+    }
+
+    .panel-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .badge {
+      background: #18382f;
+      color: var(--green);
+      padding: 8px 10px;
+      border-radius: 20px;
+      font-size: 11px;
+    }
+
+    .big-number {
+      font-size: 36px;
+      font-weight: 900;
+      margin: 24px 0 8px;
+    }
+
+    .green { color: var(--green); }
+
+    .fake-chart {
+      display: flex;
+      height: 120px;
+      align-items: end;
+      gap: 7px;
+      margin-top: 24px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .fake-chart span {
+      display: block;
+      flex: 1;
+      border-radius: 4px 4px 0 0;
+      background: linear-gradient(to top, #5141bb, #9b87ff);
+      opacity: .9;
+    }
+
+    .section {
+      max-width: 1200px;
+      margin: auto;
+      padding: 35px 25px;
+    }
+
+    .section-heading {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 15px;
+      margin-bottom: 24px;
+    }
+
+    h2 { font-size: 28px; margin: 0; }
+
+    .market-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .card {
+      padding: 22px;
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 13px;
+    }
+
+    .pair { font-weight: bold; font-size: 18px; }
+
+    .price {
+      font-size: 25px;
+      font-weight: 900;
+      margin: 17px 0 8px;
+    }
+
+    .muted { color: var(--muted); font-size: 13px; }
+
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .feature-icon { font-size: 30px; }
+    .feature-card h3 { margin-bottom: 8px; }
+
+    .cta {
+      text-align: center;
+      max-width: 1100px;
+      margin: 50px auto;
+      padding: 50px 25px;
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      background: linear-gradient(135deg, #171d36, #101529);
+    }
+
+    footer {
+      text-align: center;
+      padding: 30px 20px;
+      border-top: 1px solid var(--border);
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    @media (max-width: 850px) {
+      .hero { grid-template-columns: 1fr; padding-top: 55px; }
+      .market-grid, .feature-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+
+    @media (max-width: 540px) {
+      header { padding: 18px; }
+      nav { gap: 13px; }
+      .market-grid, .feature-grid { grid-template-columns: 1fr; }
+      .section { padding: 25px 17px; }
+      .hero { padding: 45px 18px; }
+    }
+  </style>
+
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icons/icon.svg" type="image/svg+xml">
+<meta name="theme-color" content="#080b16">
+
+</head>
+
+<body>
+<header>
+  <a class="brand" href="index.html">BIXBERRY FX</a>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="markets.html">Markets</a>
+    <a href="dashboard.html">Demo Trading</a>
+    <a href="academy.html">Academy</a>
+  
+      <a href="calendar.html">Economic Calendar</a>
+      <a href="watchlist.html">⭐ Watchlist</a>
+  <a href="journal.html">📒 Trading Journal</a>
+  <a href="analytics.html">📊 Analytics</a>
+  <a href="risk.html">🛡️ Risk Calculator</a>
+</nav>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="hero-copy">
+      <div class="eyebrow">YOUR CURRENCY MARKET HUB</div>
+      <h1>Explore markets.<br>Build your <span>strategy.</span></h1>
+      <p>
+        Discover currency markets, explore reference exchange rates,
+        practice with virtual funds, and build your forex knowledge
+        with BIXBERRY FX.
+      </p>
+
+      <div class="buttons">
+        <a class="button primary" href="dashboard.html">Start Demo Trading →</a>
+        <a class="button secondary" href="markets.html">Explore Markets</a>
+      </div>
+
+      <p class="muted">No account required · Virtual demo trading · Free market exploration</p>
+    </div>
+
+    <div class="hero-panel">
+      <div class="panel-top">
+        <strong>Demo Account Preview</strong>
+        <span class="badge">VIRTUAL FUNDS</span>
+      </div>
+
+      <div class="muted" style="margin-top:25px">Starting demo balance</div>
+      <div class="big-number">$10,000.00</div>
+      <div class="green">Practice without real-money risk</div>
+
+      <div class="fake-chart" aria-label="Decorative illustrative chart">
+        <span style="height:25%"></span>
+        <span style="height:40%"></span>
+        <span style="height:33%"></span>
+        <span style="height:56%"></span>
+        <span style="height:46%"></span>
+        <span style="height:70%"></span>
+        <span style="height:60%"></span>
+        <span style="height:85%"></span>
+        <span style="height:75%"></span>
+        <span style="height:95%"></span>
+        <span style="height:82%"></span>
+        <span style="height:100%"></span>
+      </div>
+
+      <p class="muted">Illustrative graphic — not a live price chart.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-heading">
+      <div>
+        <h2>Popular Currency Pairs</h2>
+        <p>Explore reference rates from the currency markets.</p>
+      </div>
+      <a class="button secondary" href="markets.html">View All Markets →</a>
+    </div>
+
+    <div class="market-grid">
+      <article class="card">
+        <div class="pair">EUR / USD</div>
+        <div class="price" id="eurusd">Open Markets</div>
+        <div class="muted">Euro / US Dollar</div>
+      </article>
+
+      <article class="card">
+        <div class="pair">GBP / USD</div>
+        <div class="price" id="gbpusd">Open Markets</div>
+        <div class="muted">British Pound / US Dollar</div>
+      </article>
+
+      <article class="card">
+        <div class="pair">USD / KES</div>
+        <div class="price" id="usdkes">Open Markets</div>
+        <div class="muted">US Dollar / Kenyan Shilling</div>
+      </article>
+    </div>
+
+    <p class="muted">For reference exchange rates, visit the Markets page. Rates are not executable broker quotes.</p>
+  </section>
+
+  <section class="section">
+    <div class="section-heading">
+      <div>
+        <h2>Everything in One Place</h2>
+        <p>Tools to help you learn and practice.</p>
+      </div>
+    </div>
+
+    <div class="feature-grid">
+      <article class="card feature-card">
+        <div class="feature-icon">📊</div>
+        <h3>Market Explorer</h3>
+        <p>Explore currency reference rates and popular pairs.</p>
+        <a class="green" href="markets.html">Explore Markets →</a>
+      </article>
+
+      <article class="card feature-card">
+        <div class="feature-icon">💰</div>
+        <h3>Demo Trading</h3>
+        <p>Practice BUY and SELL decisions using virtual funds.</p>
+        <a class="green" href="dashboard.html">Open Demo Account →</a>
+      </article>
+
+      <article class="card feature-card">
+        <div class="feature-icon">🌍</div>
+        <h3>Currency Converter</h3>
+        <p>Estimate conversions between supported currencies.</p>
+        <a class="green" href="markets.html">Convert Currencies →</a>
+      </article>
+
+      <article class="card feature-card">
+        <div class="feature-icon">📚</div>
+        <h3>Forex Academy</h3>
+        <p>Learn forex terminology, chart concepts, and risk management.</p>
+        <a class="green" href="academy.html">Start Learning →</a>
+      </article>
+
+      <article class="card feature-card">
+        <div class="feature-icon">📈</div>
+        <h3>Practice Strategies</h3>
+        <p>Test simple trading ideas in the demo environment.</p>
+        <a class="green" href="dashboard.html">Practice Now →</a>
+      </article>
+
+      <article class="card feature-card">
+        <div class="feature-icon">🔓</div>
+        <h3>Guest Access</h3>
+        <p>Explore the current website without creating an account.</p>
+        <a class="green" href="markets.html">Get Started →</a>
+      </article>
+    </div>
+  </section>
+
+  <section class="cta">
+    <h2>Your Practice Journey Starts Here</h2>
+    <p>Explore markets, learn the basics, and test your ideas using virtual money.</p>
+    <div class="buttons" style="justify-content:center">
+      <a class="button primary" href="dashboard.html">Launch Demo Dashboard</a>
+      <a class="button secondary" href="academy.html">Visit Forex Academy</a>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <p>BIXBERRY FX · Educational market information and simulated trading.</p>
+  <p>Demo trades use virtual funds. Reference rates and illustrative charts are not live execution prices.</p>
+</footer>
+
+<script>
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", () => {
+    navigator.serviceWorker.register("./sw.js")
+      .then(() => console.log("BIXBERRY FX offline support enabled."))
+      .catch(error => console.error("App setup error:", error));
+  });
+}
+</script>
+
+</body>
+</html>
