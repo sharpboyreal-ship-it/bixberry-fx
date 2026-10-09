@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#080b16">
+<meta name="description" content="Explore forex market news, central bank announcements, economic reports and currency market analysis with BIXBERRY FX.">
+<title>Forex News Center | BIXBERRY FX</title>
+
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icons/icon.svg" type="image/svg+xml">
+
+<style>
+:root {
+  --bg:#080b16;
+  --panel:#11182a;
+  --panel2:#172139;
+  --border:#26314b;
+  --text:#f4f7ff;
+  --muted:#a6b1ca;
+  --green:#31e6a1;
+  --purple:#8b5cf6;
+}
+
+* { box-sizing:border-box; }
+
+body {
+  margin:0;
+  background:var(--bg);
+  color:var(--text);
+  font-family:Arial,sans-serif;
+  line-height:1.6;
+}
+
+a { color:inherit; text-decoration:none; }
+
+header {
+  padding:20px 7%;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  flex-wrap:wrap;
+  gap:20px;
+  background:#0b1020;
+  border-bottom:1px solid var(--border);
+}
+
+.logo { font-size:22px; font-weight:800; }
+.logo span { color:var(--green); }
+
+nav { display:flex; gap:16px; flex-wrap:wrap; }
+nav a { color:var(--muted); font-size:14px; }
+nav a:hover { color:var(--green); }
+
+.hero {
+  padding:65px 7% 50px;
+  background:radial-gradient(ellipse at top right,#292052,transparent 65%);
+}
+
+.tag {
+  color:var(--green);
+  font-size:13px;
+  font-weight:bold;
+  letter-spacing:1px;
+}
+
+h1 {
+  font-size:clamp(35px,6vw,55px);
+  line-height:1.15;
+  margin:15px 0;
+}
+
+.hero p,.intro { color:var(--muted); max-width:750px; }
+
+main { max-width:1150px; margin:auto; padding:35px 20px 65px; }
+
+.section-heading { margin:35px 0 20px; }
+.section-heading h2 { font-size:28px; margin-bottom:5px; }
+
+.grid {
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+  gap:18px;
+  margin:25px 0 40px;
+}
+
+.card {
+  padding:23px;
+  background:var(--panel);
+  border:1px solid var(--border);
+  border-radius:14px;
+}
+
+.card:hover { border-color:var(--purple); }
+
+.card h3 { margin:10px 0; }
+.card p { color:var(--muted); font-size:14px; }
+
+.badge {
+  display:inline-block;
+  padding:5px 10px;
+  background:#202b43;
+  color:var(--green);
+  border-radius:6px;
+  font-size:12px;
+  font-weight:bold;
+}
+
+.button {
+  display:inline-block;
+  margin-top:10px;
+  padding:11px 15px;
+  background:var(--green);
+  color:#07130f;
+  font-weight:bold;
+  border-radius:8px;
+}
+
+.source {
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:15px;
+  flex-wrap:wrap;
+  padding:19px;
+  margin:12px 0;
+  border:1px solid var(--border);
+  background:var(--panel);
+  border-radius:11px;
+}
+
+.source p { color:var(--muted); margin:5px 0 0; font-size:14px; }
+.source a { color:var(--green); font-weight:bold; }
+
+.notice {
+  margin-top:35px;
+  padding:20px;
+  background:#251c12;
+  border:1px solid #6b4b26;
+  border-radius:12px;
+  color:#f4d6a4;
+}
+
+footer {
+  border-top:1px solid var(--border);
+  padding:25px 7%;
+  color:var(--muted);
+  font-size:13px;
+}
+
+@media(max-width:600px) {
+  header { align-items:flex-start; flex-direction:column; }
+  nav { gap:12px; }
+  .hero { padding-top:45px; }
+}
+</style>
+</head>
+
+<body>
+<header>
+  <a class="logo" href="index.html">BIXBERRY <span>FX</span></a>
+
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="markets.html">Markets</a>
+    <a href="dashboard.html">Demo Trading</a>
+    <a href="academy.html">Academy</a>
+    <a href="calculator.html">Calculator</a>
+    <a href="calendar.html">Economic Calendar</a>
+    <a href="news.html">Forex News</a>
+  </nav>
+</header>
+
+<section class="hero">
+  <span class="tag">BIXBERRY FX NEWS CENTER</span>
+  <h1>Understand the stories moving <span style="color:#31e6a1">currency markets.</span></h1>
+  <p>
+    Explore financial news, central bank decisions, inflation reports,
+    employment data, and global economic developments that forex traders follow.
+  </p>
+  <a class="button" href="#news-sources">Explore News Sources →</a>
+</section>
+
+<main>
+  <section>
+    <div class="section-heading">
+      <h2>What moves the forex market?</h2>
+      <p class="intro">Learn about the major themes behind currency price movements.</p>
+    </div>
+
+    <div class="grid">
+      <article class="card">
+        <span class="badge">CENTRAL BANKS</span>
+        <h3>Interest Rate Decisions</h3>
+        <p>
+          Decisions and guidance from institutions such as the Federal Reserve,
+          European Central Bank, and Bank of England can change currency-market expectations.
+        </p>
+      </article>
+
+      <article class="card">
+        <span class="badge">INFLATION</span>
+        <h3>Inflation Reports</h3>
+        <p>
+          Inflation data can influence expectations about interest rates.
+          Markets may react when results differ from forecasts.
+        </p>
+      </article>
+
+      <article class="card">
+        <span class="badge">EMPLOYMENT</span>
+        <h3>Jobs and Economic Growth</h3>
+        <p>
+          Employment figures and economic growth reports help analysts assess
+          economic conditions and possible policy changes.
+        </p>
+      </article>
+
+      <article class="card">
+        <span class="badge">GLOBAL EVENTS</span>
+        <h3>Geopolitics and Risk</h3>
+        <p>
+          Political developments, trade disputes, and unexpected global events
+          can affect investor confidence and demand for currencies.
+        </p>
+      </article>
+    </div>
+  </section>
+
+  <section id="news-sources">
+    <div class="section-heading">
+      <h2>Explore Forex News</h2>
+      <p class="intro">
+        Open these established external sources for current reporting and analysis.
+        BIXBERRY FX does not reproduce their articles or claim to provide a live news feed.
+      </p>
+    </div>
+
+    <div class="source">
+      <div>
+        <strong>Reuters Markets</strong>
+        <p>International financial news, currencies, and economic developments.</p>
+      </div>
+      <a href="https://www.reuters.com/markets/" target="_blank" rel="noopener noreferrer">Read News ↗</a>
+    </div>
+
+    <div class="source">
+      <div>
+        <strong>CNBC Currencies</strong>
+        <p>Currency coverage, financial markets, and business reporting.</p>
+      </div>
+      <a href="https://www.cnbc.com/currencies/" target="_blank" rel="noopener noreferrer">Read News ↗</a>
+    </div>
+
+    <div class="source">
+      <div>
+        <strong>Federal Reserve</strong>
+        <p>Official US monetary policy announcements, statements, and releases.</p>
+      </div>
+      <a href="https://www.federalreserve.gov/newsevents.htm" target="_blank" rel="noopener noreferrer">Official Updates ↗</a>
+    </div>
+
+    <div class="source">
+      <div>
+        <strong>European Central Bank</strong>
+        <p>Euro-area monetary policy decisions, speeches, and press releases.</p>
+      </div>
+      <a href="https://www.ecb.europa.eu/press/html/index.en.html" target="_blank" rel="noopener noreferrer">Official Updates ↗</a>
+    </div>
+
+    <div class="source">
+      <div>
+        <strong>Bank of England</strong>
+        <p>UK monetary policy announcements, financial stability updates, and reports.</p>
+      </div>
+      <a href="https://www.bankofengland.co.uk/news" target="_blank" rel="noopener noreferrer">Official Updates ↗</a>
+    </div>
+
+    <div class="source">
+      <div>
+        <strong>Central Bank of Kenya</strong>
+        <p>Kenyan monetary policy announcements, exchange-rate information, and economic publications.</p>
+      </div>
+      <a href="https://www.centralbank.go.ke/" target="_blank" rel="noopener noreferrer">Official Website ↗</a>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-heading">
+      <h2>How to analyse a news release</h2>
+    </div>
+
+    <div class="grid">
+      <article class="card">
+        <h3>01. Check the source</h3>
+        <p>Prefer official announcements and reliable reporting. Check the publication date and time.</p>
+      </article>
+
+      <article class="card">
+        <h3>02. Compare expectations</h3>
+        <p>Compare the reported figure with forecasts and previous data. Consider revisions and broader context.</p>
+      </article>
+
+      <article class="card">
+        <h3>03. Manage your risk</h3>
+        <p>News can trigger sudden price movements, wider spreads, and slippage. Avoid assuming that a headline guarantees a market direction.</p>
+      </article>
+    </div>
+  </section>
+
+  <div class="notice">
+    <strong>Important:</strong> This page is for educational purposes.
+    External sites control their own content and availability.
+    Forex trading involves risk, and news analysis does not guarantee profitable trades.
+  </div>
+</main>
+
+<footer>
+  © 2026 BIXBERRY FX · Learn carefully. Practice responsibly.
+</footer>
+
+<script>
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", () => {
+    navigator.serviceWorker.register("./sw.js").catch(error => {
+      console.error("Service worker registration failed:", error);
+    });
+  });
+}
+</script>
+</body>
+</html>
