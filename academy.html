@@ -4,156 +4,283 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Forex Academy | BIXBERRY FX</title>
+  <meta name="description" content="Learn forex trading basics, currency pairs, technical analysis and risk management with BIXBERRY FX Academy.">
   <style>
-    *{box-sizing:border-box}
-    body{margin:0;background:#0b0b18;color:#f5f5ff;font-family:Arial,sans-serif}
-    header{padding:22px 7%;display:flex;justify-content:space-between;align-items:center;gap:15px;flex-wrap:wrap;border-bottom:1px solid #292642}
-    .logo{font-size:24px;font-weight:800;color:#ad91ff}
-    nav{display:flex;gap:18px;flex-wrap:wrap}
-    nav a{color:#dedaf3;text-decoration:none}
-    nav a:hover{color:#ad91ff}
-    main{max-width:1100px;margin:auto;padding:45px 22px 80px}
-    .hero{padding:35px 0}
-    .eyebrow{color:#ad91ff;font-weight:bold;letter-spacing:2px;font-size:13px}
-    h1{font-size:clamp(36px,6vw,60px);margin:15px 0}
-    h2{margin-top:0}
-    p{color:#b9b7cd;line-height:1.8}
-    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:18px}
-    .card,.quiz{background:#15152a;border:1px solid #302d4d;border-radius:16px;padding:24px}
-    .number{color:#ad91ff;font-size:14px;font-weight:bold}
-    .button{display:inline-block;background:#8a63ed;color:white;border:0;border-radius:8px;padding:12px 18px;text-decoration:none;cursor:pointer;font-weight:bold}
-    .button:hover{background:#7046d5}
-    .lesson-content{display:none;margin-top:16px;padding-top:12px;border-top:1px solid #373451}
-    .lesson-content.open{display:block}
-    .quiz{margin-top:35px}
-    .question{padding:15px 0;border-bottom:1px solid #302d4d}
-    label{display:block;margin:12px 0;color:#dedaf3;cursor:pointer}
-    input[type=radio]{margin-right:8px}
-    #quiz-result{font-weight:bold;color:#c5b2ff;margin-top:20px}
-    footer{text-align:center;padding:25px;border-top:1px solid #292642;color:#aaa9c2}
+    :root {
+      --bg: #080b16;
+      --panel: #11182a;
+      --panel2: #172139;
+      --text: #f4f7ff;
+      --muted: #a6b1ca;
+      --purple: #8b5cf6;
+      --green: #31e6a1;
+      --border: #26314b;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+      padding: 20px 7%;
+      border-bottom: 1px solid var(--border);
+      background: #0b1020;
+    }
+
+    .logo {
+      font-size: 23px;
+      font-weight: 800;
+      letter-spacing: 1px;
+    }
+
+    .logo span { color: var(--green); }
+
+    nav { display: flex; gap: 20px; flex-wrap: wrap; }
+
+    nav a { color: var(--muted); }
+    nav a:hover, nav a.active { color: var(--green); }
+
+    .hero {
+      padding: 75px 7% 55px;
+      background: radial-gradient(ellipse at top right, #292052 0%, transparent 55%);
+    }
+
+    .tag {
+      display: inline-block;
+      color: var(--green);
+      background: #12372f;
+      padding: 7px 13px;
+      border-radius: 20px;
+      font-size: 13px;
+    }
+
+    h1 {
+      font-size: clamp(35px, 6vw, 58px);
+      line-height: 1.12;
+      max-width: 750px;
+      margin: 20px 0;
+    }
+
+    h1 span { color: var(--green); }
+
+    .hero p, .section-intro {
+      color: var(--muted);
+      max-width: 720px;
+    }
+
+    .button {
+      display: inline-block;
+      margin-top: 18px;
+      padding: 13px 20px;
+      border-radius: 9px;
+      background: var(--green);
+      color: #06130e;
+      font-weight: bold;
+    }
+
+    main { padding: 20px 7% 70px; }
+
+    .section-title { margin-top: 35px; }
+
+    .section-title h2 { font-size: 29px; margin-bottom: 5px; }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(235px, 1fr));
+      gap: 18px;
+      margin: 25px 0 45px;
+    }
+
+    .card {
+      padding: 23px;
+      border: 1px solid var(--border);
+      border-radius: 15px;
+      background: var(--panel);
+    }
+
+    .card:hover {
+      border-color: var(--purple);
+      transform: translateY(-2px);
+      transition: 0.2s;
+    }
+
+    .number {
+      color: var(--green);
+      font-size: 13px;
+      font-weight: bold;
+    }
+
+    .card h3 { margin: 10px 0; }
+    .card p { color: var(--muted); font-size: 14px; }
+
+    .lesson-button {
+      border: 1px solid var(--border);
+      color: var(--green);
+      background: var(--panel2);
+      border-radius: 8px;
+      padding: 10px 13px;
+      cursor: pointer;
+      font-weight: bold;
+      margin-top: 8px;
+    }
+
+    .lesson-content {
+      display: none;
+      padding-top: 12px;
+      margin-top: 12px;
+      border-top: 1px solid var(--border);
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .lesson-content.open { display: block; }
+
+    .warning {
+      padding: 22px;
+      border: 1px solid #6b4b26;
+      background: #251c12;
+      border-radius: 13px;
+      color: #f4d6a4;
+      margin-top: 30px;
+    }
+
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 25px 7%;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    @media (max-width: 600px) {
+      header { align-items: flex-start; flex-direction: column; }
+      nav { gap: 13px; }
+      .hero { padding-top: 50px; }
+    }
   </style>
 </head>
 <body>
-<header>
-  <a class="logo" href="index.html" style="text-decoration:none">BIXBERRY FX</a>
-  <nav>
-    <a href="index.html">Home</a>
-    <a href="markets.html">Markets</a>
-    <a href="dashboard.html">Dashboard</a>
-    <a href="login.html">Login</a>
-  </nav>
-</header>
+  <header>
+    <a class="logo" href="index.html">BIXBERRY <span>FX</span></a>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="markets.html">Markets</a>
+      <a href="dashboard.html">Demo Trading</a>
+      <a class="active" href="academy.html">Academy</a>
+    </nav>
+  </header>
 
-<main>
   <section class="hero">
-    <p class="eyebrow">BIXBERRY FX EDUCATION</p>
-    <h1>Master the basics of Forex.</h1>
-    <p>Learn how currency markets work, understand risk, and test your knowledge at your own pace.</p>
+    <span class="tag">BIXBERRY FX ACADEMY</span>
+    <h1>Your journey to understanding <span>forex trading</span> starts here.</h1>
+    <p>Learn the basics, understand currency pairs, explore chart analysis, and discover how traders manage risk. Start learning for free, with no account required.</p>
+    <a class="button" href="#lessons">Start Learning →</a>
   </section>
 
-  <section>
-    <h2>📚 Your learning path</h2>
+  <main>
+    <section class="section-title" id="lessons">
+      <h2>Forex Learning Path</h2>
+      <p class="section-intro">Work through these beginner-friendly lessons at your own pace. Select any lesson to reveal its explanation.</p>
+    </section>
+
     <div class="grid">
       <article class="card">
-        <span class="number">LESSON 01</span>
-        <h2>What is Forex?</h2>
-        <p>Understand the world's foreign exchange market.</p>
-        <button class="button" onclick="toggleLesson(1)">Study lesson</button>
-        <div class="lesson-content" id="lesson-1">
-          <p>Forex means foreign exchange. It involves exchanging one currency for another. For example, EUR/USD represents the euro against the US dollar.</p>
-          <p>Currency prices can rise or fall due to economic news, interest rates, and market demand.</p>
+        <span class="number">LESSON 01 · BEGINNER</span>
+        <h3>What is Forex?</h3>
+        <p>Understand the foreign exchange market and how currency trading works.</p>
+        <button class="lesson-button" aria-expanded="false">Read Lesson +</button>
+        <div class="lesson-content">
+          Forex, short for foreign exchange, is the market where currencies are exchanged. Traders compare one currency with another, such as the euro against the US dollar. Currency prices can rise or fall, and trading can result in losses.
         </div>
       </article>
 
       <article class="card">
-        <span class="number">LESSON 02</span>
-        <h2>Currency pairs</h2>
-        <p>Learn to read pairs such as EUR/USD and GBP/USD.</p>
-        <button class="button" onclick="toggleLesson(2)">Study lesson</button>
-        <div class="lesson-content" id="lesson-2">
-          <p>The first currency is the base currency. The second is the quote currency.</p>
-          <p>If EUR/USD is 1.1000, one euro is worth 1.10 US dollars at that quoted rate. The rate available to you may differ.</p>
+        <span class="number">LESSON 02 · BEGINNER</span>
+        <h3>Currency Pairs</h3>
+        <p>Learn what EUR/USD, GBP/USD and USD/JPY mean.</p>
+        <button class="lesson-button" aria-expanded="false">Read Lesson +</button>
+        <div class="lesson-content">
+          A currency pair compares two currencies. In EUR/USD, EUR is the base currency and USD is the quote currency. If EUR/USD is 1.1000, one euro is worth 1.10 US dollars at that quoted rate. Rates vary by provider and market conditions.
         </div>
       </article>
 
       <article class="card">
-        <span class="number">LESSON 03</span>
-        <h2>Risk management</h2>
-        <p>Understand why protecting your money matters.</p>
-        <button class="button" onclick="toggleLesson(3)">Study lesson</button>
-        <div class="lesson-content" id="lesson-3">
-          <p>Forex trading can result in significant losses. Leverage magnifies both gains and losses.</p>
-          <p>Learn about position sizing, stop-loss orders, and risk-to-reward ratios before considering real trading. A stop-loss cannot guarantee a particular exit price in all market conditions.</p>
+        <span class="number">LESSON 03 · BEGINNER</span>
+        <h3>Pips and Spreads</h3>
+        <p>Understand two important terms used when discussing forex prices.</p>
+        <button class="lesson-button" aria-expanded="false">Read Lesson +</button>
+        <div class="lesson-content">
+          A pip is a standard unit used to describe price movement. For many pairs, it is 0.0001; for many JPY pairs, it is 0.01. The spread is the difference between the bid and ask prices. Actual trading costs may also include commissions and fees.
         </div>
       </article>
 
       <article class="card">
-        <span class="number">LESSON 04</span>
-        <h2>Charts and trends</h2>
-        <p>Discover how traders study price movements.</p>
-        <button class="button" onclick="toggleLesson(4)">Study lesson</button>
-        <div class="lesson-content" id="lesson-4">
-          <p>Candlestick charts display price movement over a chosen period. Traders may study trends, support, resistance, and volatility.</p>
-          <p>Charts cannot predict the future with certainty. Always consider risk and avoid relying on a single indicator.</p>
+        <span class="number">LESSON 04 · CHARTS</span>
+        <h3>Candlestick Charts</h3>
+        <p>Learn what candles show about price movement over time.</p>
+        <button class="lesson-button" aria-expanded="false">Read Lesson +</button>
+        <div class="lesson-content">
+          A candlestick represents an opening price, closing price, high and low for a selected period. A candle's body shows the difference between open and close. Its wicks show the high and low. Colors depend on the chart's settings.
+        </div>
+      </article>
+
+      <article class="card">
+        <span class="number">LESSON 05 · ANALYSIS</span>
+        <h3>Support and Resistance</h3>
+        <p>Explore price areas traders watch on charts.</p>
+        <button class="lesson-button" aria-expanded="false">Read Lesson +</button>
+        <div class="lesson-content">
+          Support is an area where price has previously found buying interest. Resistance is an area where selling interest has appeared. These are zones, not guarantees: prices can break through them, and past behavior does not ensure future results.
+        </div>
+      </article>
+
+      <article class="card">
+        <span class="number">LESSON 06 · RISK</span>
+        <h3>Risk Management</h3>
+        <p>Learn why protecting your trading capital matters.</p>
+        <button class="lesson-button" aria-expanded="false">Read Lesson +</button>
+        <div class="lesson-content">
+          Decide how much you can afford to lose before considering a trade. Position size, leverage, stop-loss orders and trading costs all affect risk. Stop-loss orders may not execute at the expected price during fast or illiquid markets. Never trade with money needed for essential expenses.
         </div>
       </article>
     </div>
-  </section>
 
-  <section class="quiz">
-    <p class="eyebrow">KNOWLEDGE CHECK</p>
-    <h2>🧠 Test your Forex knowledge</h2>
-    <form id="quiz-form">
-      <div class="question">
-        <p><strong>1. What does Forex mean?</strong></p>
-        <label><input type="radio" name="q1" value="a"> Foreign exchange</label>
-        <label><input type="radio" name="q1" value="b"> Foreign export tax</label>
-        <label><input type="radio" name="q1" value="c"> Fixed external rate</label>
-      </div>
-      <div class="question">
-        <p><strong>2. What does EUR/USD represent?</strong></p>
-        <label><input type="radio" name="q2" value="a"> Two stock market indexes</label>
-        <label><input type="radio" name="q2" value="b"> The euro against the US dollar</label>
-        <label><input type="radio" name="q2" value="c"> The British pound against the yen</label>
-      </div>
-      <div class="question">
-        <p><strong>3. What can leverage do?</strong></p>
-        <label><input type="radio" name="q3" value="a"> Remove all trading risk</label>
-        <label><input type="radio" name="q3" value="b"> Guarantee a profit</label>
-        <label><input type="radio" name="q3" value="c"> Magnify gains and losses</label>
-      </div>
-      <button class="button" type="submit">Check my answers</button>
-    </form>
-    <p id="quiz-result" role="status"></p>
-  </section>
-</main>
+    <section class="section-title">
+      <h2>Practice Without Real Money</h2>
+      <p class="section-intro">Use the BIXBERRY FX demo dashboard to explore a simulated trading experience with virtual funds.</p>
+      <a class="button" href="dashboard.html">Open Demo Dashboard →</a>
+    </section>
 
-<footer>
-  <p>© 2026 BIXBERRY FX · Educational content only. Not financial advice.</p>
-</footer>
+    <div class="warning">
+      <strong>Important risk warning</strong><br>
+      Forex and leveraged trading involve substantial risk and may not be suitable for everyone. Educational content and demo results do not guarantee future performance. BIXBERRY FX's demo environment is for practice only and does not execute real trades or provide personalized financial advice.
+    </div>
+  </main>
 
-<script>
-function toggleLesson(number){
-  const lesson=document.getElementById("lesson-"+number);
-  lesson.classList.toggle("open");
-}
-document.getElementById("quiz-form").addEventListener("submit",function(event){
-  event.preventDefault();
-  const answers={q1:"a",q2:"b",q3:"c"};
-  let score=0;
-  let unanswered=0;
-  for(const [question,correct] of Object.entries(answers)){
-    const selected=document.querySelector('input[name="'+question+'"]:checked');
-    if(!selected) unanswered++;
-    else if(selected.value===correct) score++;
-  }
-  const result=document.getElementById("quiz-result");
-  if(unanswered){
-    result.textContent="Please answer all three questions before checking your score.";
-  }else{
-    result.textContent="Your score: "+score+"/3. "+(score===3?"Excellent work! 🎉":"Review the lessons and try again!");
-  }
-});
-</script>
+  <footer>
+    © 2026 BIXBERRY FX · Learn carefully. Practice responsibly.
+  </footer>
+
+  <script>
+    document.querySelectorAll(".lesson-button").forEach(button => {
+      button.addEventListener("click", () => {
+        const content = button.nextElementSibling;
+        const isOpen = content.classList.toggle("open");
+        button.textContent = isOpen ? "Close Lesson −" : "Read Lesson +";
+        button.setAttribute("aria-expanded", String(isOpen));
+      });
+    });
+  </script>
 </body>
 </html>
