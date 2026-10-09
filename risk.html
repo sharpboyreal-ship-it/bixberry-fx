@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#080d1b">
+  <title>Risk Calculator | BIXBERRY FX</title>
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="icons/icon.svg">
+  <style>
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background: #080d1b;
+      color: #f5f7ff;
+      font-family: Arial, sans-serif;
+    }
+
+    .container {
+      width: min(1000px, 94%);
+      margin: 30px auto;
+    }
+
+    a { color: #c4b5fd; text-decoration: none; }
+
+    .panel, .result-card {
+      background: #111a2e;
+      border: 1px solid #293651;
+      border-radius: 14px;
+      padding: 22px;
+      margin-bottom: 18px;
+    }
+
+    h1 { font-size: clamp(28px, 5vw, 42px); }
+
+    .muted {
+      color: #aab6d3;
+      line-height: 1.6;
+    }
+
+    .form-grid, .results {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      gap: 14px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 7px;
+      color: #cbd5e1;
+      font-size: 14px;
+    }
+
+    input, select {
+      width: 100%;
+      padding: 12px;
+      border-radius: 8px;
+      border: 1px solid #354363;
+      background: #080d1b;
+      color: white;
+      font: inherit;
+    }
+
+    button {
+      padding: 13px 18px;
+      border: 0;
+      border-radius: 8px;
+      background: #8b5cf6;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    button:hover { opacity: .86; }
+
+    .result-card { margin: 0; }
+    .result-label { color: #aab6d3; font-size: 13px; }
+    .result-value {
+      margin-top: 12px;
+      font-size: 24px;
+      font-weight: bold;
+      overflow-wrap: anywhere;
+    }
+
+    .positive { color: #4ade80; }
+    .negative { color: #fb7185; }
+
+    .notice {
+      padding: 14px;
+      border-radius: 10px;
+      background: #0b1427;
+      border: 1px solid #354363;
+      line-height: 1.6;
+    }
+
+    .warning {
+      color: #fbbf24;
+      border-color: #927126;
+    }
+
+    .small { font-size: 13px; }
+
+    @media (max-width: 600px) {
+      .container { width: 92%; }
+    }
+  </style>
+</head>
+<body>
+  <main class="container">
+    <a href="index.html">← Back to BIXBERRY FX</a>
+
+    <header class="panel">
+      <p>🛡️ PRACTICE SMARTER</p>
+      <h1>Risk Management Calculator</h1>
+      <p class="muted">
+        Estimate the amount at risk, position size, and potential reward
+        for an illustrative forex trade.
+      </p>
+    </header>
+
+    <section class="panel">
+      <h2>Trade settings</h2>
+
+      <form id="riskForm">
+        <div class="form-grid">
+          <div>
+            <label for="balance">Account balance (account currency)</label>
+            <input id="balance" type="number" min="0.01" step="any"
+              value="1000" required>
+          </div>
+
+          <div>
+            <label for="riskPercent">Risk percentage (%)</label>
+            <input id="riskPercent" type="number" min="0.01" max="100"
+              step="any" value="1" required>
+          </div>
+
+          <div>
+            <label for="pair">Currency pair</label>
+            <select id="pair">
+              <option value="EUR/USD">EUR/USD</option>
+              <option value="GBP/USD">GBP/USD</option>
+              <option value="AUD/USD">AUD/USD</option>
+              <option value="NZD/USD">NZD/USD</option>
+              <option value="USD/JPY">USD/JPY</option>
+              <option value="USD/CHF">USD/CHF</option>
+              <option value="USD/CAD">USD/CAD</option>
+              <option value="USD/KES">USD/KES</option>
+              <option value="EUR/GBP">EUR/GBP</option>
+            </select>
+          </div>
+
+          <div>
+            <label for="direction">Trade direction</label>
+            <select id="direction">
+              <option value="BUY">BUY</option>
+              <option value="SELL">SELL</option>
+            </select>
+          </div>
+
+          <div>
+            <label for="entry">Entry price</label>
+            <input id="entry" type="number" min="0.00000001"
+              step="any" value="1.08500" required>
+          </div>
+
+          <div>
+            <label for="stop">Stop-loss price</label>
+            <input id="stop" type="number" min="0.00000001"
+              step="any" value="1.08000" required>
+          </div>
+
+          <div>
+            <label for="target">Take-profit price</label>
+            <input id="target" type="number" min="0.00000001"
+              step="any" value="1.09500" required>
+          </div>
+
+          <div>
+            <label for="accountCurrency">Account currency</label>
+            <select id="accountCurrency">
+              <option value="USD">USD — US Dollar</option>
+              <option value="KES">KES — Kenyan Shilling</option>
+              <option value="EUR">EUR — Euro</option>
+              <option value="GBP">GBP — British Pound</option>
+            </select>
+          </div>
+
+          <div>
+            <label for="conversion">Quote currency to account currency rate</label>
+            <input id="conversion" type="number" min="0.00000001"
+              step="any" value="1" required>
+            <p class="muted small" id="conversionHelp">
+              For USD-quoted pairs in a USD account, use 1.
+            </p>
+          </div>
+        </div>
+
+        <p>
+          <button type="submit">Calculate Risk</button>
+        </p>
+        <p class="muted small">
+          The conversion field means: how many units of your account currency
+          equal one unit of the pair's quote currency. For example, for
+          USD/KES in a USD account, enter the number of USD per KES, not
+          the KES-per-USD exchange rate.
+        </p>
+      </form>
+    </section>
+
+    <section class="panel">
+      <h2>📊 Your results</h2>
+
+      <div class="results">
+        <article class="result-card">
+          <div class="result-label">Maximum planned risk</div>
+          <div class="result-value negative" id="riskAmount">—</div>
+        </article>
+
+        <article class="result-card">
+          <div class="result-label">Position size (base units)</div>
+          <div class="result-value" id="positionSize">—</div>
+        </article>
+
+        <article class="result-card">
+          <div class="result-label">Stop-loss distance</div>
+          <div class="result-value" id="stopDistance">—</div>
+        </article>
+
+        <article class="result-card">
+          <div class="result-label">Potential loss at stop</div>
+          <div class="result-value negative" id="potentialLoss">—</div>
+        </article>
+
+        <article class="result-card">
+          <div class="result-label">Potential profit at target</div>
+          <div class="result-value positive" id="potentialProfit">—</div>
+        </article>
+
+        <article class="result-card">
+          <div class="result-label">Risk-to-reward ratio</div>
+          <div class="result-value" id="ratio">—</div>
+        </article>
+      </div>
+
+      <p id="warning" class="notice" aria-live="polite">
+        Enter valid trade settings to calculate results.
+      </p>
+    </section>
+
+    <section class="panel">
+      <h2>🛡️ Important risk reminders</h2>
+      <p class="muted">
+        These results are estimates based on your inputs. Actual losses can
+        exceed the planned amount because of slippage, gaps, spreads,
+        commissions, and other costs.
+      </p>
+      <p class="muted">
+        This calculator assumes a simple linear position and does not
+        account for leverage requirements, broker-specific contract sizes,
+        minimum trade sizes, or margin rules. Confirm calculations with
+        your broker before relying on them.
+      </p>
+    </section>
+  </main>
+
+  <script>
+    const form = document.getElementById("riskForm");
+
+    function number(id) {
+      return Number(document.getElementById(id).value);
+    }
+
+    function format(value, decimals = 2) {
+      return value.toLocaleString(undefined, {
+        minimumFractionDigits: decimals,
+        maximumFractionDigits: decimals
+      });
+    }
+
+    function show(id, value) {
+      document.getElementById(id).textContent = value;
+    }
+
+    function calculate() {
+      const balance = number("balance");
+      const riskPercent = number("riskPercent");
+      const entry = number("entry");
+      const stop = number("stop");
+      const target = number("target");
+      const conversion = number("conversion");
+      const pair = document.getElementById("pair").value;
+      const direction = document.getElementById("direction").value;
+      const accountCurrency =
+        document.getElementById("accountCurrency").value;
+      const quoteCurrency = pair.split("/")[1];
+
+      const valid = [balance, riskPercent, entry, stop, target, conversion]
+        .every(Number.isFinite) &&
+        balance > 0 &&
+        riskPercent > 0 && riskPercent <= 100 &&
+        entry > 0 && stop > 0 && target > 0 && conversion > 0;
+
+      const warning = document.getElementById("warning");
+
+      if (!valid) {
+        warning.textContent =
+          "Please enter valid positive values. Risk percentage must be between 0 and 100.";
+        warning.className = "notice warning";
+        return;
+      }
+
+      const correctStop = direction === "BUY"
+        ? stop < entry
+        : stop > entry;
+
+      const correctTarget = direction === "BUY"
+        ? target > entry
+        : target < entry;
+
+      if (!correctStop || !correctTarget) {
+        warning.textContent =
+          "Check your prices: a BUY normally has a stop below entry and target above entry; a SELL normally has a stop above entry and target below entry.";
+        warning.className = "notice warning";
+        return;
+      }
+
+      const riskBudget = balance * riskPercent / 100;
+      const stopDistance = Math.abs(entry - stop);
+      const targetDistance = Math.abs(target - entry);
+
+      // Position size is base-currency units. Quote-currency P/L per unit
+      // is the price difference, then converted to account currency.
+      const positionUnits = riskBudget / (stopDistance * conversion);
+      const potentialLoss = positionUnits * stopDistance * conversion;
+      const potentialProfit = positionUnits * targetDistance * conversion;
+      const rr = potentialProfit / potentialLoss;
+
+      show("riskAmount", accountCurrency + " " + format(riskBudget));
+      show("positionSize", format(positionUnits, 2) + " units");
+      show("stopDistance", format(stopDistance, 5) + " price units");
+      show("potentialLoss", accountCurrency + " " + format(potentialLoss));
+      show("potentialProfit", accountCurrency + " " + format(potentialProfit));
+      show("ratio", "1 : " + format(rr, 2));
+
+      const pipSize = quoteCurrency === "JPY" ? 0.01 : 0.0001;
+      const pips = stopDistance / pipSize;
+      show("stopDistance",
+        format(stopDistance, 5) + " price units (" + format(pips, 1) + " pips)");
+
+      warning.className = "notice";
+      warning.textContent =
+        "Your planned risk is " + format(riskPercent, 2) +
+        "% of the account balance. These estimates exclude trading costs and slippage.";
+
+      if (riskPercent > 2) {
+        warning.className = "notice warning";
+        warning.textContent +=
+          " Your selected risk is above 2%; consider whether that exposure fits your plan.";
+      }
+
+      if (accountCurrency !== quoteCurrency) {
+        document.getElementById("conversionHelp").textContent =
+          "Enter how many " + accountCurrency + " equal 1 " + quoteCurrency +
+          ". Confirm the conversion rate independently.";
+      } else {
+        document.getElementById("conversionHelp").textContent =
+          "The quote currency matches your account currency, so use 1.";
+      }
+    }
+
+    form.addEventListener("submit", event => {
+      event.preventDefault();
+      calculate();
+    });
+
+    document.getElementById("pair").addEventListener("change", () => {
+      const pair = document.getElementById("pair").value;
+      const quoteCurrency = pair.split("/")[1];
+      const accountCurrency = document.getElementById("accountCurrency").value;
+
+      if (quoteCurrency === accountCurrency) {
+        document.getElementById("conversion").value = "1";
+      }
+
+      document.getElementById("conversionHelp").textContent =
+        "Quote currency: " + quoteCurrency +
+        ". Enter how many " + accountCurrency + " equal 1 " +
+        quoteCurrency + ".";
+    });
+
+    document.getElementById("accountCurrency").addEventListener("change", () => {
+      const pair = document.getElementById("pair").value;
+      const quoteCurrency = pair.split("/")[1];
+      const accountCurrency = document.getElementById("accountCurrency").value;
+
+      if (quoteCurrency === accountCurrency) {
+        document.getElementById("conversion").value = "1";
+      }
+
+      document.getElementById("conversionHelp").textContent =
+        "Quote currency: " + quoteCurrency +
+        ". Enter how many " + accountCurrency + " equal 1 " +
+        quoteCurrency + ".";
+    });
+
+    calculate();
+
+    if ("serviceWorker" in navigator) {
+      window.addEventListener("load", () => {
+        navigator.serviceWorker.register("./sw.js").catch(() => {});
+      });
+    }
+  </script>
+</body>
+</html>
