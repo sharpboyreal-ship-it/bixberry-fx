@@ -1,42 +1,548 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Markets | BIXBERRY FX</title>
-<link rel="stylesheet" href="css/style.css">
-<link rel="stylesheet" href="css/features.css">
-<script src="js/features.js" defer></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Forex Markets | BIXBERRY FX</title>
+  <meta name="description" content="Explore currency reference rates and convert currencies with BIXBERRY FX.">
+
+  <style>
+    :root {
+      --bg: #080b16;
+      --panel: #111729;
+      --border: #27314b;
+      --text: #f3f5ff;
+      --muted: #9aa6c4;
+      --purple: #8b73ff;
+      --green: #26d99a;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: Arial, sans-serif;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    header {
+      padding: 20px 5%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      flex-wrap: wrap;
+      background: #0d1222;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .brand {
+      font-size: 23px;
+      font-weight: 900;
+      color: var(--purple);
+    }
+
+    nav {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    nav a { color: var(--muted); }
+    nav a:hover { color: white; }
+
+    main {
+      max-width: 1200px;
+      padding: 35px 20px;
+      margin: auto;
+    }
+
+    h1 { font-size: clamp(28px, 4vw, 42px); margin-bottom: 10px; }
+    h2 { margin-top: 0; }
+    p { color: var(--muted); line-height: 1.6; }
+
+    .intro { margin-bottom: 30px; }
+
+    .notice {
+      background: #292315;
+      border: 1px solid #5a4a24;
+      color: #f6d78c;
+      padding: 14px;
+      border-radius: 10px;
+      margin: 20px 0;
+      line-height: 1.6;
+      font-size: 13px;
+    }
+
+    .section-title {
+      margin: 35px 0 18px;
+    }
+
+    .market-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .card {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 22px;
+      min-width: 0;
+    }
+
+    .pair {
+      font-size: 18px;
+      font-weight: bold;
+    }
+
+    .rate {
+      font-size: 25px;
+      font-weight: 800;
+      margin: 17px 0 8px;
+      overflow-wrap: anywhere;
+    }
+
+    .muted { color: var(--muted); font-size: 13px; }
+    .green { color: var(--green); }
+
+    .converter {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      gap: 22px;
+      margin-top: 18px;
+    }
+
+    label {
+      display: block;
+      color: var(--muted);
+      font-size: 13px;
+      margin-bottom: 8px;
+    }
+
+    input, select, button {
+      width: 100%;
+      padding: 13px;
+      border-radius: 9px;
+      border: 1px solid var(--border);
+      background: #0a1020;
+      color: white;
+      font: inherit;
+    }
+
+    input, select { margin-bottom: 17px; }
+
+    button {
+      cursor: pointer;
+      background: #5f4bd8;
+      border-color: var(--purple);
+      font-weight: bold;
+    }
+
+    button:hover { opacity: .9; }
+
+    .swap {
+      width: auto;
+      padding: 10px 16px;
+      margin: 0 0 16px;
+    }
+
+    .result {
+      border: 1px solid var(--border);
+      background: #0a1020;
+      padding: 22px;
+      border-radius: 12px;
+      margin-top: 15px;
+    }
+
+    .result-amount {
+      font-size: clamp(24px, 4vw, 35px);
+      font-weight: 900;
+      overflow-wrap: anywhere;
+      margin: 10px 0;
+    }
+
+    .table-wrap { overflow-x: auto; }
+
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      min-width: 420px;
+    }
+
+    th, td {
+      text-align: left;
+      padding: 15px 12px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    th {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    footer {
+      text-align: center;
+      padding: 30px 20px;
+      border-top: 1px solid var(--border);
+      margin-top: 50px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    @media (max-width: 800px) {
+      .market-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .converter { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 520px) {
+      header { padding: 18px; }
+      nav { gap: 13px; }
+      main { padding: 24px 15px; }
+      .market-grid { grid-template-columns: 1fr; }
+    }
+  </style>
 </head>
-<body class="feature-page">
-<main class="feature-container">
-<a class="logo" href="index.html">BIXBERRY<span>FX</span></a>
-<div class="feature-links">
-<a href="index.html">Home</a>
-<a href="dashboard.html">Dashboard</a>
-<a href="login.html">Login</a>
-<a href="academy.html">Academy</a>
-</div>
 
-<h1>Currency Markets</h1>
-<p>Explore currency exchange reference rates.</p>
+<body>
+<header>
+  <a href="index.html" class="brand">BIXBERRY FX</a>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="dashboard.html">Dashboard</a>
+    <a href="markets.html">Markets</a>
+    <a href="academy.html">Academy</a>
+  </nav>
+</header>
 
-<div class="feature-box">
-<h2>Exchange Rates</h2>
-<p id="market-updated">Fetching reference rates...</p>
-<div style="overflow-x:auto">
-<table class="feature-table">
-<thead>
-<tr><th>Pair</th><th>Rate</th><th>Type</th></tr>
-</thead>
-<tbody id="market-data">
-<tr><td colspan="3">Loading...</td></tr>
-</tbody>
-</table>
-</div>
-<p>Rates are reference data and may be delayed. They are not executable forex quotes.</p>
-<button class="feature-button" onclick="loadReferenceRates()">Refresh Rates</button>
-</div>
+<main>
+  <section class="intro">
+    <h1>Explore the Currency Markets 🌍</h1>
+    <p>Explore currency pairs and convert currencies in one place.</p>
+  </section>
+
+  <div class="notice">
+    These are reference exchange rates, not executable trading quotes.
+    Rates may be delayed or unavailable. BIXBERRY FX does not execute
+    real-money trades.
+  </div>
+
+  <section>
+    <h2 class="section-title">Currency Converter</h2>
+
+    <div class="card">
+      <div class="converter">
+        <div>
+          <label for="amount">Amount to convert</label>
+          <input id="amount" type="number" min="0" step="any" value="100">
+
+          <label for="from">From currency</label>
+          <select id="from">
+            <option value="USD">USD — US Dollar</option>
+            <option value="KES">KES — Kenyan Shilling</option>
+            <option value="EUR">EUR — Euro</option>
+            <option value="GBP">GBP — British Pound</option>
+            <option value="JPY">JPY — Japanese Yen</option>
+            <option value="CAD">CAD — Canadian Dollar</option>
+            <option value="AUD">AUD — Australian Dollar</option>
+            <option value="CHF">CHF — Swiss Franc</option>
+            <option value="INR">INR — Indian Rupee</option>
+            <option value="ZAR">ZAR — South African Rand</option>
+            <option value="UGX">UGX — Ugandan Shilling</option>
+            <option value="TZS">TZS — Tanzanian Shilling</option>
+          </select>
+
+          <button id="swap" class="swap" type="button">⇅ Swap currencies</button>
+
+          <label for="to">To currency</label>
+          <select id="to">
+            <option value="KES">KES — Kenyan Shilling</option>
+            <option value="USD">USD — US Dollar</option>
+            <option value="EUR">EUR — Euro</option>
+            <option value="GBP">GBP — British Pound</option>
+            <option value="JPY">JPY — Japanese Yen</option>
+            <option value="CAD">CAD — Canadian Dollar</option>
+            <option value="AUD">AUD — Australian Dollar</option>
+            <option value="CHF">CHF — Swiss Franc</option>
+            <option value="INR">INR — Indian Rupee</option>
+            <option value="ZAR">ZAR — South African Rand</option>
+            <option value="UGX">UGX — Ugandan Shilling</option>
+            <option value="TZS">TZS — Tanzanian Shilling</option>
+          </select>
+
+          <button id="convert" type="button">Convert Currency</button>
+        </div>
+
+        <div>
+          <p class="muted">CONVERSION RESULT</p>
+          <div class="result">
+            <div class="muted" id="conversion-label">100 USD in KES</div>
+            <div class="result-amount" id="conversion-result">Loading rates...</div>
+            <p id="conversion-rate">Fetching reference exchange rates...</p>
+            <p class="muted" id="updated">Rates will appear here.</p>
+          </div>
+          <p class="muted">
+            The result is an estimate using the available reference rate.
+            Your bank or money transfer provider may offer a different rate.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2 class="section-title">Popular Forex Pairs</h2>
+
+    <div class="market-grid">
+      <article class="card">
+        <div class="pair">EUR / USD</div>
+        <div class="rate" id="eurusd">Loading...</div>
+        <div class="muted">Euro / US Dollar</div>
+      </article>
+
+      <article class="card">
+        <div class="pair">GBP / USD</div>
+        <div class="rate" id="gbpusd">Loading...</div>
+        <div class="muted">British Pound / US Dollar</div>
+      </article>
+
+      <article class="card">
+        <div class="pair">USD / JPY</div>
+        <div class="rate" id="usdjpy">Loading...</div>
+        <div class="muted">US Dollar / Japanese Yen</div>
+      </article>
+
+      <article class="card">
+        <div class="pair">USD / KES</div>
+        <div class="rate" id="usdkes">Loading...</div>
+        <div class="muted">US Dollar / Kenyan Shilling</div>
+      </article>
+
+      <article class="card">
+        <div class="pair">EUR / GBP</div>
+        <div class="rate" id="eurgbp">Loading...</div>
+        <div class="muted">Euro / British Pound</div>
+      </article>
+
+      <article class="card">
+        <div class="pair">AUD / USD</div>
+        <div class="rate" id="audusd">Loading...</div>
+        <div class="muted">Australian Dollar / US Dollar</div>
+      </article>
+    </div>
+
+    <p id="market-status" class="muted" role="status" aria-live="polite">
+      Connecting to the reference-rate service...
+    </p>
+  </section>
+
+  <section>
+    <h2 class="section-title">Exchange Rates Against USD</h2>
+    <div class="card table-wrap">
+      <table>
+        <thead>
+          <tr><th>Currency</th><th>Currency Name</th><th>1 USD equals</th></tr>
+        </thead>
+        <tbody id="rates-table">
+          <tr><td colspan="3">Loading reference rates...</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
 </main>
+
+<footer>
+  <p>BIXBERRY FX · Educational and reference information only.</p>
+  <p>Exchange rates are not guaranteed trading prices.</p>
+</footer>
+
+<script>
+(() => {
+  "use strict";
+
+  const $ = id => document.getElementById(id);
+
+  const currencies = {
+    USD: "US Dollar",
+    KES: "Kenyan Shilling",
+    EUR: "Euro",
+    GBP: "British Pound",
+    JPY: "Japanese Yen",
+    CAD: "Canadian Dollar",
+    AUD: "Australian Dollar",
+    CHF: "Swiss Franc",
+    INR: "Indian Rupee",
+    ZAR: "South African Rand",
+    UGX: "Ugandan Shilling",
+    TZS: "Tanzanian Shilling"
+  };
+
+  let rates = {};
+  let rateDate = "";
+
+  function format(value, currency) {
+    return new Intl.NumberFormat("en-US", {
+      style: "currency",
+      currency,
+      maximumFractionDigits: 4
+    }).format(value);
+  }
+
+  async function fetchRates(base) {
+    const response = await fetch(
+      "https://api.frankfurter.dev/v1/latest?base=" +
+      encodeURIComponent(base) +
+      "&symbols=" +
+      encodeURIComponent(Object.keys(currencies).filter(c => c !== base).join(","))
+    );
+
+    if (!response.ok) {
+      throw new Error("The exchange-rate service returned an error.");
+    }
+
+    const data = await response.json();
+
+    if (!data.rates || typeof data.rates !== "object") {
+      throw new Error("The service returned invalid rate data.");
+    }
+
+    return data;
+  }
+
+  async function loadRates() {
+    $("market-status").textContent = "Fetching reference rates...";
+
+    try {
+      const data = await fetchRates("USD");
+      rates = { USD: 1, ...data.rates };
+      rateDate = data.date || "Date unavailable";
+
+      const pairValues = {
+        eurusd: rates.EUR ? 1 / rates.EUR : null,
+        gbpusd: rates.GBP ? 1 / rates.GBP : null,
+        usdjpy: rates.JPY,
+        usdkes: rates.KES,
+        eurgbp: rates.EUR && rates.GBP ? rates.GBP / rates.EUR : null,
+        audusd: rates.AUD ? 1 / rates.AUD : null
+      };
+
+      Object.entries(pairValues).forEach(([id, value]) => {
+        $(id).textContent = value == null
+          ? "Unavailable"
+          : value.toLocaleString("en-US", {
+              minimumFractionDigits: 3,
+              maximumFractionDigits: 5
+            });
+      });
+
+      const tbody = $("rates-table");
+      tbody.replaceChildren();
+
+      Object.keys(currencies).forEach(currency => {
+        const value = rates[currency];
+        if (value == null) return;
+
+        const row = document.createElement("tr");
+
+        [currency, currencies[currency], value.toLocaleString("en-US", {
+          minimumFractionDigits: 2,
+          maximumFractionDigits: 5
+        })].forEach(text => {
+          const cell = document.createElement("td");
+          cell.textContent = text;
+          row.appendChild(cell);
+        });
+
+        tbody.appendChild(row);
+      });
+
+      $("market-status").textContent =
+        "Reference rates loaded. Rate date: " + rateDate + ".";
+      $("updated").textContent = "Reference rate date: " + rateDate + ".";
+
+      convert();
+    } catch (error) {
+      console.error("Reference rates failed to load:", error);
+      $("market-status").textContent =
+        "Reference rates could not be loaded. Check your internet connection and try again.";
+      $("rates-table").innerHTML =
+        '<tr><td colspan="3">Rates unavailable. Please try again later.</td></tr>';
+      $("conversion-result").textContent = "Rates unavailable";
+      $("conversion-rate").textContent = "Unable to fetch a reference rate.";
+    }
+  }
+
+  async function convert() {
+    const amount = Number($("amount").value);
+    const from = $("from").value;
+    const to = $("to").value;
+
+    $("conversion-label").textContent =
+      (Number.isFinite(amount) ? amount : 0) + " " + from + " in " + to;
+
+    if (!Number.isFinite(amount) || amount < 0) {
+      $("conversion-result").textContent = "Enter a valid amount";
+      $("conversion-rate").textContent = "";
+      return;
+    }
+
+    try {
+      let currentRates = rates;
+
+      if (!currentRates[from] || !currentRates[to]) {
+        const data = await fetchRates(from);
+        currentRates = { [from]: 1, ...data.rates };
+      }
+
+      if (currentRates[from] == null || currentRates[to] == null) {
+        throw new Error("A currency rate is unavailable.");
+      }
+
+      // Rates are expressed as currency units per USD.
+      // Convert the source amount to USD, then to the destination currency.
+      const result = amount / currentRates[from] * currentRates[to];
+
+      $("conversion-result").textContent = format(result, to);
+      $("conversion-rate").textContent =
+        "1 " + from + " = " +
+        (currentRates[to] / currentRates[from]).toLocaleString("en-US", {
+          maximumFractionDigits: 6
+        }) + " " + to;
+
+      $("updated").textContent = "Reference rate date: " + rateDate + ".";
+    } catch (error) {
+      console.error("Currency conversion failed:", error);
+      $("conversion-result").textContent = "Rate unavailable";
+      $("conversion-rate").textContent =
+        "The selected currencies could not be converted right now.";
+    }
+  }
+
+  $("convert").addEventListener("click", convert);
+
+  $("swap").addEventListener("click", () => {
+    const from = $("from");
+    const to = $("to");
+    const previous = from.value;
+    from.value = to.value;
+    to.value = previous;
+    convert();
+  });
+
+  $("amount").addEventListener("input", convert);
+  $("from").addEventListener("change", convert);
+  $("to").addEventListener("change", convert);
+
+  loadRates();
+})();
+</script>
 </body>
 </html>
