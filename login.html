@@ -1,75 +1,167 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Login | BIXBERRY FX</title>
-<style>
-*{box-sizing:border-box}
-body{margin:0;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px;background:#0b0b18;color:#f5f5ff;font-family:Arial,sans-serif}
-.container{width:100%;max-width:440px}
-.logo{display:block;text-align:center;color:#ad91ff;text-decoration:none;font-size:30px;font-weight:800;margin-bottom:12px}
-.subtitle{text-align:center;color:#b9b7cd;margin-bottom:28px}
-.card{background:#15152a;border:1px solid #302d4d;border-radius:18px;padding:28px}
-.tabs{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:25px}
-.tab{padding:12px;border:1px solid #373454;border-radius:8px;background:#1c1b35;color:#ddd;cursor:pointer}
-.tab.active{background:#8a63ed;color:white;border-color:#8a63ed}
-h1{font-size:27px;margin:0 0 8px}
-.description{color:#aaa9c2;font-size:14px;line-height:1.6;margin-bottom:24px}
-label{display:block;margin:16px 0 8px;font-size:14px}
-input{width:100%;padding:13px;border:1px solid #373454;border-radius:8px;background:#0e0e20;color:white;font-size:15px;outline:none}
-input:focus{border-color:#a88bff}
-button.submit{width:100%;padding:14px;margin-top:22px;border:0;border-radius:8px;background:#8a63ed;color:white;font-size:15px;font-weight:bold;cursor:pointer}
-button.submit:hover{background:#7046d5}
-#message{font-size:14px;line-height:1.6;margin-top:16px;overflow-wrap:anywhere}
-.notice{font-size:12px;color:#aaa9c2;line-height:1.6;margin-top:20px}
-.back{text-align:center;margin-top:22px}
-.back a{color:#ad91ff;text-decoration:none}
-.hidden{display:none}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login | BIXBERRY FX</title>
+
+  <style>
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      padding: 20px;
+      background: #07111f;
+      color: white;
+      font-family: Arial, sans-serif;
+    }
+
+    .card {
+      width: 100%;
+      max-width: 420px;
+      padding: 30px;
+      border: 1px solid #26384f;
+      border-radius: 16px;
+      background: #101e30;
+    }
+
+    h1 {
+      text-align: center;
+      color: #43e0b5;
+    }
+
+    p {
+      text-align: center;
+      color: #a9b8cc;
+    }
+
+    label {
+      display: block;
+      margin-top: 18px;
+    }
+
+    input {
+      width: 100%;
+      margin-top: 8px;
+      padding: 13px;
+      border: 1px solid #344861;
+      border-radius: 8px;
+      background: #07111f;
+      color: white;
+    }
+
+    button {
+      width: 100%;
+      margin-top: 22px;
+      padding: 14px;
+      border: 0;
+      border-radius: 8px;
+      background: #43e0b5;
+      color: #07111f;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    #message {
+      margin-top: 18px;
+      overflow-wrap: anywhere;
+    }
+
+    a {
+      color: #43e0b5;
+    }
+  </style>
 </head>
+
 <body>
-<div class="container">
-<a href="index.html" class="logo">BIXBERRY FX</a>
-<p class="subtitle">Your learning and demo-trading space.</p>
+  <main class="card">
+    <h1>BIXBERRY FX</h1>
+    <p>Welcome back! Log in to your account.</p>
 
-<div class="card">
-<div class="tabs">
-<button class="tab active" id="login-tab" type="button">Sign in</button>
-<button class="tab" id="register-tab" type="button">Create account</button>
-</div>
+    <form id="loginForm">
+      <label for="email">Email Address</label>
+      <input
+        id="email"
+        type="email"
+        autocomplete="email"
+        required
+      >
 
-<h1 id="form-title">Welcome back</h1>
-<p class="description" id="form-description">Sign in to your account to continue.</p>
+      <label for="password">Password</label>
+      <input
+        id="password"
+        type="password"
+        autocomplete="current-password"
+        required
+      >
 
-<form id="auth-form">
-<div id="name-field" class="hidden">
-<label for="full-name">Full name</label>
-<input id="full-name" type="text" autocomplete="name" placeholder="Your full name">
-</div>
+      <button type="submit">LOG IN</button>
+    </form>
 
-<label for="email">Email address</label>
-<input id="email" type="email" autocomplete="email" placeholder="you@example.com" required>
+    <p id="message" role="status"></p>
 
-<label for="password">Password</label>
-<input id="password" type="password" autocomplete="current-password" minlength="8" placeholder="At least 8 characters" required>
+    <p>
+      Don't have an account?
+      <a href="signup.html">Create one</a>
+    </p>
 
-<div id="confirm-field" class="hidden">
-<label for="confirm-password">Confirm password</label>
-<input id="confirm-password" type="password" autocomplete="new-password" minlength="8" placeholder="Repeat your password">
-</div>
+    <p><a href="index.html">Back to homepage</a></p>
+  </main>
 
-<button class="submit" type="submit" id="submit-button">Sign in</button>
-</form>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-<p id="message" role="status" aria-live="polite"></p>
-<p class="notice">Use an email address you control. This page is a user-interface prototype until Supabase authentication is configured. Do not enter a real password until the service is connected and verified.</p>
-</div>
+  <script>
+    // Use the SAME project URL and publishable key as signup.html.
+    const SUPABASE_URL = "YOUR_SUPABASE_URL";
+    const SUPABASE_PUBLISHABLE_KEY = "YOUR_SUPABASE_PUBLISHABLE_KEY";
 
-<div class="back"><a href="index.html">← Back to homepage</a></div>
-</div>
+    const form = document.getElementById("loginForm");
+    const message = document.getElementById("message");
 
+    form.addEventListener("submit", async (event) => {
+      event.preventDefault();
 
-  <script type="module" src="js/auth.js"></script>
+      if (
+        SUPABASE_URL === "YOUR_SUPABASE_URL" ||
+        SUPABASE_PUBLISHABLE_KEY === "YOUR_SUPABASE_PUBLISHABLE_KEY"
+      ) {
+        message.textContent =
+          "Setup required: add your Supabase project URL and publishable key.";
+        return;
+      }
+
+      const email = document.getElementById("email").value.trim();
+      const password = document.getElementById("password").value;
+
+      message.textContent = "Logging in...";
+
+      try {
+        const client = window.supabase.createClient(
+          SUPABASE_URL,
+          SUPABASE_PUBLISHABLE_KEY
+        );
+
+        const { error } = await client.auth.signInWithPassword({
+          email,
+          password
+        });
+
+        if (error) throw error;
+
+        message.textContent = "Login successful! Opening your dashboard...";
+
+        setTimeout(() => {
+          window.location.href = "dashboard.html";
+        }, 1000);
+
+      } catch (error) {
+        message.textContent =
+          error.message || "Login failed. Please try again.";
+      }
+    });
+  </script>
 </body>
 </html>
