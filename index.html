@@ -1,297 +1,407 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="BIXBERRY FX — Explore currency markets, practice demo trading, and learn forex trading.">
+  <title>BIXBERRY FX | Explore the Markets</title>
 
-    <title>BIXBERRY FX | Forex Trading & Education</title>
+  <style>
+    :root {
+      --bg: #080b16;
+      --panel: #111729;
+      --border: #27314b;
+      --text: #f3f5ff;
+      --muted: #9aa6c4;
+      --purple: #8b73ff;
+      --green: #26d99a;
+    }
 
-    <meta name="description"
-          content="Explore forex markets, interactive charts, trading education, and demo trading with BIXBERRY FX.">
+    * { box-sizing: border-box; }
 
-    <link rel="stylesheet" href="css/style.css">
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: Arial, sans-serif;
+    }
 
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="js/script.js" defer></script>
+    a { text-decoration: none; color: inherit; }
+
+    header {
+      padding: 20px 6%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      flex-wrap: wrap;
+      border-bottom: 1px solid var(--border);
+      background: #0d1222;
+    }
+
+    .brand {
+      font-size: 24px;
+      font-weight: 900;
+      letter-spacing: 1px;
+      color: var(--purple);
+    }
+
+    nav {
+      display: flex;
+      gap: 22px;
+      flex-wrap: wrap;
+    }
+
+    nav a { color: var(--muted); }
+    nav a:hover { color: white; }
+
+    .hero {
+      max-width: 1250px;
+      margin: auto;
+      padding: 85px 25px 65px;
+      display: grid;
+      grid-template-columns: 1.2fr .8fr;
+      align-items: center;
+      gap: 45px;
+    }
+
+    .eyebrow {
+      color: var(--green);
+      font-size: 13px;
+      font-weight: bold;
+      letter-spacing: 2px;
+    }
+
+    h1 {
+      font-size: clamp(38px, 6vw, 66px);
+      line-height: 1.08;
+      margin: 20px 0;
+    }
+
+    h1 span { color: var(--purple); }
+
+    p {
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    .hero-copy > p {
+      max-width: 620px;
+      font-size: 17px;
+    }
+
+    .buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 13px;
+      margin-top: 30px;
+    }
+
+    .button {
+      display: inline-block;
+      padding: 14px 20px;
+      border: 1px solid var(--border);
+      border-radius: 9px;
+      font-weight: bold;
+      transition: transform .2s, opacity .2s;
+    }
+
+    .button:hover { transform: translateY(-2px); }
+
+    .primary {
+      background: #5f4bd8;
+      border-color: var(--purple);
+    }
+
+    .secondary { background: var(--panel); }
+
+    .hero-panel {
+      background: linear-gradient(145deg, #171d36, #0e1425);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 26px;
+      box-shadow: 0 20px 70px rgba(0,0,0,.25);
+    }
+
+    .panel-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .badge {
+      background: #18382f;
+      color: var(--green);
+      padding: 8px 10px;
+      border-radius: 20px;
+      font-size: 11px;
+    }
+
+    .big-number {
+      font-size: 36px;
+      font-weight: 900;
+      margin: 24px 0 8px;
+    }
+
+    .green { color: var(--green); }
+
+    .fake-chart {
+      display: flex;
+      height: 120px;
+      align-items: end;
+      gap: 7px;
+      margin-top: 24px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .fake-chart span {
+      display: block;
+      flex: 1;
+      border-radius: 4px 4px 0 0;
+      background: linear-gradient(to top, #5141bb, #9b87ff);
+      opacity: .9;
+    }
+
+    .section {
+      max-width: 1200px;
+      margin: auto;
+      padding: 35px 25px;
+    }
+
+    .section-heading {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 15px;
+      margin-bottom: 24px;
+    }
+
+    h2 { font-size: 28px; margin: 0; }
+
+    .market-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .card {
+      padding: 22px;
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 13px;
+    }
+
+    .pair { font-weight: bold; font-size: 18px; }
+
+    .price {
+      font-size: 25px;
+      font-weight: 900;
+      margin: 17px 0 8px;
+    }
+
+    .muted { color: var(--muted); font-size: 13px; }
+
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .feature-icon { font-size: 30px; }
+    .feature-card h3 { margin-bottom: 8px; }
+
+    .cta {
+      text-align: center;
+      max-width: 1100px;
+      margin: 50px auto;
+      padding: 50px 25px;
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      background: linear-gradient(135deg, #171d36, #101529);
+    }
+
+    footer {
+      text-align: center;
+      padding: 30px 20px;
+      border-top: 1px solid var(--border);
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    @media (max-width: 850px) {
+      .hero { grid-template-columns: 1fr; padding-top: 55px; }
+      .market-grid, .feature-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+
+    @media (max-width: 540px) {
+      header { padding: 18px; }
+      nav { gap: 13px; }
+      .market-grid, .feature-grid { grid-template-columns: 1fr; }
+      .section { padding: 25px 17px; }
+      .hero { padding: 45px 18px; }
+    }
+  </style>
 </head>
 
 <body>
-
-<header class="navbar">
-    <a href="#" class="logo">BIXBERRY<span>FX</span></a>
-
-    <nav>
-        <a href="#markets">Markets</a>
-        <a href="#trading">Trading</a>
-        <a href="#academy">Academy</a>
-        <a href="#about">About</a>
-    
-        <a href="markets.html">Live Markets</a>
-        <a href="dashboard.html">Dashboard</a>
-        <a href="academy.html">Academy</a>
-        <a href="login.html">Login</a>
-    </nav>
-
-    <div class="nav-buttons">
-        <a href="#account" class="login-btn">Log In</a>
-        <a href="#account" class="signup-btn">Get Started</a>
-    </div>
+<header>
+  <a class="brand" href="index.html">BIXBERRY FX</a>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="markets.html">Markets</a>
+    <a href="dashboard.html">Demo Trading</a>
+    <a href="academy.html">Academy</a>
+  </nav>
 </header>
 
-<section class="hero">
-    <div class="hero-content">
-        <span class="badge">YOUR GATEWAY TO FOREX</span>
+<main>
+  <section class="hero">
+    <div class="hero-copy">
+      <div class="eyebrow">YOUR CURRENCY MARKET HUB</div>
+      <h1>Explore markets.<br>Build your <span>strategy.</span></h1>
+      <p>
+        Discover currency markets, explore reference exchange rates,
+        practice with virtual funds, and build your forex knowledge
+        with BIXBERRY FX.
+      </p>
 
-        <h1>Trade Smarter.<br>
-            <span>Think Bigger.</span>
-        </h1>
+      <div class="buttons">
+        <a class="button primary" href="dashboard.html">Start Demo Trading →</a>
+        <a class="button secondary" href="markets.html">Explore Markets</a>
+      </div>
 
-        <p>
-            Discover financial markets, sharpen your trading skills,
-            and practice your strategies with BIXBERRY FX.
-        </p>
-
-        <div class="hero-buttons">
-            <a href="#trading" class="primary-btn">Explore Markets →</a>
-            <a href="#academy" class="secondary-btn">Start Learning</a>
-        </div>
-
-        <div class="hero-note">
-            ✓ Forex Education &nbsp;&nbsp;
-            ✓ Market Insights &nbsp;&nbsp;
-            ✓ Demo Trading
-        </div>
+      <p class="muted">No account required · Virtual demo trading · Free market exploration</p>
     </div>
 
-    <div class="hero-card">
-        <div class="card-heading">
-            <div>
-                <small>MARKET OVERVIEW</small>
-                <h3>Forex Markets</h3>
-            </div>
-            <span class="live-dot">● Market data</span>
-        </div>
+    <div class="hero-panel">
+      <div class="panel-top">
+        <strong>Demo Account Preview</strong>
+        <span class="badge">VIRTUAL FUNDS</span>
+      </div>
 
-        <div class="chart-info">
-            <div>
-                <small>EUR/USD</small>
-                <h2 id="eur-price">1.0845</h2>
-            </div>
-            <span class="positive">Demo data</span>
-        </div>
+      <div class="muted" style="margin-top:25px">Starting demo balance</div>
+      <div class="big-number">$10,000.00</div>
+      <div class="green">Practice without real-money risk</div>
 
-        <div class="chart-container">
-            <canvas id="marketChart"></canvas>
-        </div>
+      <div class="fake-chart" aria-label="Decorative illustrative chart">
+        <span style="height:25%"></span>
+        <span style="height:40%"></span>
+        <span style="height:33%"></span>
+        <span style="height:56%"></span>
+        <span style="height:46%"></span>
+        <span style="height:70%"></span>
+        <span style="height:60%"></span>
+        <span style="height:85%"></span>
+        <span style="height:75%"></span>
+        <span style="height:95%"></span>
+        <span style="height:82%"></span>
+        <span style="height:100%"></span>
+      </div>
 
-        <div class="chart-footer">
-            <span>Illustrative chart</span>
-            <span>Market data coming soon</span>
-        </div>
+      <p class="muted">Illustrative graphic — not a live price chart.</p>
     </div>
-</section>
+  </section>
 
-<section class="stats">
-    <div>
-        <h2>01</h2>
-        <p>Learn Forex</p>
-    </div>
-
-    <div>
-        <h2>02</h2>
-        <p>Analyze Markets</p>
-    </div>
-
-    <div>
-        <h2>03</h2>
-        <p>Practice Trading</p>
-    </div>
-
-    <div>
-        <h2>04</h2>
-        <p>Build Your Skills</p>
-    </div>
-</section>
-
-<section class="section" id="markets">
+  <section class="section">
     <div class="section-heading">
-        <div>
-            <span class="badge">MARKET WATCH</span>
-            <h2>Explore the <span>Markets</span></h2>
-            <p>Discover popular currency pairs.</p>
-        </div>
-
-        <span class="demo-label">Illustrative prices — not live</span>
+      <div>
+        <h2>Popular Currency Pairs</h2>
+        <p>Explore reference rates from the currency markets.</p>
+      </div>
+      <a class="button secondary" href="markets.html">View All Markets →</a>
     </div>
 
     <div class="market-grid">
+      <article class="card">
+        <div class="pair">EUR / USD</div>
+        <div class="price" id="eurusd">Open Markets</div>
+        <div class="muted">Euro / US Dollar</div>
+      </article>
 
-        <article class="market-card">
-            <div class="pair">
-                <div class="currency-icon">EU</div>
-                <div>
-                    <h3>EUR/USD</h3>
-                    <p>Euro / US Dollar</p>
-                </div>
-            </div>
-            <h2>1.0845</h2>
-            <p class="muted">Sample price</p>
-        </article>
+      <article class="card">
+        <div class="pair">GBP / USD</div>
+        <div class="price" id="gbpusd">Open Markets</div>
+        <div class="muted">British Pound / US Dollar</div>
+      </article>
 
-        <article class="market-card">
-            <div class="pair">
-                <div class="currency-icon">GU</div>
-                <div>
-                    <h3>GBP/USD</h3>
-                    <p>British Pound / US Dollar</p>
-                </div>
-            </div>
-            <h2>1.2710</h2>
-            <p class="muted">Sample price</p>
-        </article>
-
-        <article class="market-card">
-            <div class="pair">
-                <div class="currency-icon">UJ</div>
-                <div>
-                    <h3>USD/JPY</h3>
-                    <p>US Dollar / Japanese Yen</p>
-                </div>
-            </div>
-            <h2>149.50</h2>
-            <p class="muted">Sample price</p>
-        </article>
-
-        <article class="market-card">
-            <div class="pair">
-                <div class="currency-icon">AU</div>
-                <div>
-                    <h3>AUD/USD</h3>
-                    <p>Australian Dollar / US Dollar</p>
-                </div>
-            </div>
-            <h2>0.6530</h2>
-            <p class="muted">Sample price</p>
-        </article>
-
-    </div>
-</section>
-
-<section class="trading-section" id="trading">
-    <div class="trading-text">
-        <span class="badge">PRACTICE WITHOUT RISKING REAL MONEY</span>
-
-        <h2>Master your strategy with <span>demo trading.</span></h2>
-
-        <p>
-            Explore how trading works using virtual funds.
-            Practice your decisions and understand potential profits
-            and losses before considering real-money trading.
-        </p>
-
-        <ul>
-            <li>✓ Practice with virtual funds</li>
-            <li>✓ Learn about market movements</li>
-            <li>✓ Understand trading risk</li>
-        </ul>
-
-        <a href="#account" class="primary-btn">Explore Demo Trading →</a>
+      <article class="card">
+        <div class="pair">USD / KES</div>
+        <div class="price" id="usdkes">Open Markets</div>
+        <div class="muted">US Dollar / Kenyan Shilling</div>
+      </article>
     </div>
 
-    <div class="trading-panel">
-        <span class="badge">DEMO ACCOUNT PREVIEW</span>
+    <p class="muted">For reference exchange rates, visit the Markets page. Rates are not executable broker quotes.</p>
+  </section>
 
-        <p>Virtual Account Balance</p>
-        <h2>$10,000.00</h2>
-
-        <div class="balance-line">
-            <span>Account type</span>
-            <strong>Practice</strong>
-        </div>
-
-        <div class="balance-line">
-            <span>Real money</span>
-            <strong>$0.00</strong>
-        </div>
-
-        <div class="balance-line">
-            <span>Trading status</span>
-            <strong class="positive">Preview only</strong>
-        </div>
-
-        <p class="muted">
-            This is a visual preview. No real orders are executed.
-        </p>
-    </div>
-</section>
-
-<section class="section academy" id="academy">
+  <section class="section">
     <div class="section-heading">
-        <div>
-            <span class="badge">BIXBERRY ACADEMY</span>
-            <h2>Learn. Practice. <span>Improve.</span></h2>
-            <p>Build your forex knowledge one lesson at a time.</p>
-        </div>
+      <div>
+        <h2>Everything in One Place</h2>
+        <p>Tools to help you learn and practice.</p>
+      </div>
     </div>
 
-    <div class="academy-grid">
-        <article class="lesson-card">
-            <span class="lesson-number">01</span>
-            <h3>Forex Fundamentals</h3>
-            <p>Understand currency pairs, pips, spreads, and the forex market.</p>
-            <a href="#lesson1">Explore lessons →</a>
-        </article>
+    <div class="feature-grid">
+      <article class="card feature-card">
+        <div class="feature-icon">📊</div>
+        <h3>Market Explorer</h3>
+        <p>Explore currency reference rates and popular pairs.</p>
+        <a class="green" href="markets.html">Explore Markets →</a>
+      </article>
 
-        <article class="lesson-card">
-            <span class="lesson-number">02</span>
-            <h3>Technical Analysis</h3>
-            <p>Learn about charts, trends, support, resistance, and indicators.</p>
-            <a href="#lesson2">Explore lessons →</a>
-        </article>
+      <article class="card feature-card">
+        <div class="feature-icon">💰</div>
+        <h3>Demo Trading</h3>
+        <p>Practice BUY and SELL decisions using virtual funds.</p>
+        <a class="green" href="dashboard.html">Open Demo Account →</a>
+      </article>
 
-        <article class="lesson-card">
-            <span class="lesson-number">03</span>
-            <h3>Risk Management</h3>
-            <p>Understand position sizing, stop-losses, and trading risk.</p>
-            <a href="#lesson3">Explore lessons →</a>
-        </article>
+      <article class="card feature-card">
+        <div class="feature-icon">🌍</div>
+        <h3>Currency Converter</h3>
+        <p>Estimate conversions between supported currencies.</p>
+        <a class="green" href="markets.html">Convert Currencies →</a>
+      </article>
+
+      <article class="card feature-card">
+        <div class="feature-icon">📚</div>
+        <h3>Forex Academy</h3>
+        <p>Learn forex terminology, chart concepts, and risk management.</p>
+        <a class="green" href="academy.html">Start Learning →</a>
+      </article>
+
+      <article class="card feature-card">
+        <div class="feature-icon">📈</div>
+        <h3>Practice Strategies</h3>
+        <p>Test simple trading ideas in the demo environment.</p>
+        <a class="green" href="dashboard.html">Practice Now →</a>
+      </article>
+
+      <article class="card feature-card">
+        <div class="feature-icon">🔓</div>
+        <h3>Guest Access</h3>
+        <p>Explore the current website without creating an account.</p>
+        <a class="green" href="markets.html">Get Started →</a>
+      </article>
     </div>
-</section>
+  </section>
 
-<section class="account-section" id="account">
-    <span class="badge">YOUR JOURNEY STARTS HERE</span>
-    <h2>Ready to explore <span>BIXBERRY FX?</span></h2>
-    <p>
-        Your next step is learning how the forex market works.
-    </p>
-    <a href="#academy" class="primary-btn">Explore the Academy →</a>
-    <p class="muted">
-        Account registration and secure login will be added in a later step.
-    </p>
-</section>
-
-<section class="about-section" id="about">
-    <h2>About BIXBERRY FX</h2>
-    <p>
-        BIXBERRY FX is being developed as a platform for forex education,
-        market information, chart analysis, and virtual trading practice.
-        Market prices shown on this initial website are illustrative,
-        not live financial data.
-    </p>
-</section>
+  <section class="cta">
+    <h2>Your Practice Journey Starts Here</h2>
+    <p>Explore markets, learn the basics, and test your ideas using virtual money.</p>
+    <div class="buttons" style="justify-content:center">
+      <a class="button primary" href="dashboard.html">Launch Demo Dashboard</a>
+      <a class="button secondary" href="academy.html">Visit Forex Academy</a>
+    </div>
+  </section>
+</main>
 
 <footer>
-    <a href="#" class="logo">BIXBERRY<span>FX</span></a>
-
-    <p>Learn the market. Practice your strategy. Trade smarter.</p>
-
-    <p class="footer-note">
-        Forex trading involves significant risk. Educational content
-        and demo tools do not guarantee trading profits.
-    </p>
-
-    <p>© 2026 BIXBERRY FX. All rights reserved.</p>
+  <p>BIXBERRY FX · Educational market information and simulated trading.</p>
+  <p>Demo trades use virtual funds. Reference rates and illustrative charts are not live execution prices.</p>
 </footer>
-
 </body>
 </html>
