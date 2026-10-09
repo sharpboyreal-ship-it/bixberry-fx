@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Login | BIXBERRY FX</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px;background:#0b0b18;color:#f5f5ff;font-family:Arial,sans-serif}
+.container{width:100%;max-width:440px}
+.logo{display:block;text-align:center;color:#ad91ff;text-decoration:none;font-size:30px;font-weight:800;margin-bottom:12px}
+.subtitle{text-align:center;color:#b9b7cd;margin-bottom:28px}
+.card{background:#15152a;border:1px solid #302d4d;border-radius:18px;padding:28px}
+.tabs{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:25px}
+.tab{padding:12px;border:1px solid #373454;border-radius:8px;background:#1c1b35;color:#ddd;cursor:pointer}
+.tab.active{background:#8a63ed;color:white;border-color:#8a63ed}
+h1{font-size:27px;margin:0 0 8px}
+.description{color:#aaa9c2;font-size:14px;line-height:1.6;margin-bottom:24px}
+label{display:block;margin:16px 0 8px;font-size:14px}
+input{width:100%;padding:13px;border:1px solid #373454;border-radius:8px;background:#0e0e20;color:white;font-size:15px;outline:none}
+input:focus{border-color:#a88bff}
+button.submit{width:100%;padding:14px;margin-top:22px;border:0;border-radius:8px;background:#8a63ed;color:white;font-size:15px;font-weight:bold;cursor:pointer}
+button.submit:hover{background:#7046d5}
+#message{font-size:14px;line-height:1.6;margin-top:16px;overflow-wrap:anywhere}
+.notice{font-size:12px;color:#aaa9c2;line-height:1.6;margin-top:20px}
+.back{text-align:center;margin-top:22px}
+.back a{color:#ad91ff;text-decoration:none}
+.hidden{display:none}
+</style>
+</head>
+<body>
+<div class="container">
+<a href="index.html" class="logo">BIXBERRY FX</a>
+<p class="subtitle">Your learning and demo-trading space.</p>
+
+<div class="card">
+<div class="tabs">
+<button class="tab active" id="login-tab" type="button">Sign in</button>
+<button class="tab" id="register-tab" type="button">Create account</button>
+</div>
+
+<h1 id="form-title">Welcome back</h1>
+<p class="description" id="form-description">Sign in to your account to continue.</p>
+
+<form id="auth-form">
+<div id="name-field" class="hidden">
+<label for="full-name">Full name</label>
+<input id="full-name" type="text" autocomplete="name" placeholder="Your full name">
+</div>
+
+<label for="email">Email address</label>
+<input id="email" type="email" autocomplete="email" placeholder="you@example.com" required>
+
+<label for="password">Password</label>
+<input id="password" type="password" autocomplete="current-password" minlength="8" placeholder="At least 8 characters" required>
+
+<div id="confirm-field" class="hidden">
+<label for="confirm-password">Confirm password</label>
+<input id="confirm-password" type="password" autocomplete="new-password" minlength="8" placeholder="Repeat your password">
+</div>
+
+<button class="submit" type="submit" id="submit-button">Sign in</button>
+</form>
+
+<p id="message" role="status" aria-live="polite"></p>
+<p class="notice">Use an email address you control. This page is a user-interface prototype until Supabase authentication is configured. Do not enter a real password until the service is connected and verified.</p>
+</div>
+
+<div class="back"><a href="index.html">← Back to homepage</a></div>
+</div>
+
+
+  <script type="module" src="js/auth.js"></script>
+</body>
+</html>

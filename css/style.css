@@ -1,0 +1,563 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+:root {
+    --background: #080d19;
+    --panel: #101827;
+    --panel-light: #172236;
+    --text: #f5f7ff;
+    --muted: #96a2b7;
+    --purple: #9366ff;
+    --blue: #4f8cff;
+    --green: #38d9a9;
+    --border: rgba(255, 255, 255, 0.09);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background: var(--background);
+    color: var(--text);
+    font-family: 'Inter', sans-serif;
+    line-height: 1.6;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.navbar {
+    min-height: 82px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 7%;
+    border-bottom: 1px solid var(--border);
+    gap: 25px;
+}
+
+.logo {
+    font-size: 25px;
+    font-weight: 800;
+    letter-spacing: -1px;
+}
+
+.logo span {
+    color: var(--purple);
+}
+
+.navbar nav {
+    display: flex;
+    gap: 28px;
+}
+
+.navbar nav a {
+    color: var(--muted);
+    font-size: 13px;
+    transition: 0.2s;
+}
+
+.navbar nav a:hover {
+    color: white;
+}
+
+.nav-buttons {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    font-size: 13px;
+}
+
+.signup-btn,
+.primary-btn {
+    background: linear-gradient(110deg, var(--purple), var(--blue));
+    padding: 12px 20px;
+    border-radius: 8px;
+    font-weight: 700;
+    display: inline-block;
+    transition: transform 0.2s;
+}
+
+.signup-btn:hover,
+.primary-btn:hover {
+    transform: translateY(-2px);
+}
+
+.login-btn {
+    color: var(--muted);
+}
+
+.hero {
+    padding: 95px 7%;
+    display: grid;
+    grid-template-columns: 1fr 0.9fr;
+    align-items: center;
+    gap: 65px;
+    background:
+        radial-gradient(ellipse at 15% 15%, #281d502d, transparent 45%),
+        radial-gradient(ellipse at 90% 60%, #152e552d, transparent 40%);
+}
+
+.badge {
+    color: #bba7ff;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 2px;
+}
+
+.hero h1 {
+    font-size: clamp(43px, 5.3vw, 72px);
+    line-height: 1.12;
+    letter-spacing: -3px;
+    margin: 23px 0;
+}
+
+.hero h1 span,
+.section-heading h2 span,
+.trading-text h2 span,
+.account-section h2 span {
+    background: linear-gradient(100deg, #aa8aff, #65a4ff);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.hero-content > p,
+.trading-text > p,
+.account-section > p {
+    max-width: 520px;
+    color: var(--muted);
+    font-size: 14px;
+    margin-bottom: 28px;
+}
+
+.hero-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.secondary-btn {
+    border: 1px solid var(--border);
+    padding: 12px 20px;
+    border-radius: 8px;
+    font-size: 13px;
+}
+
+.hero-note {
+    margin-top: 30px;
+    color: var(--muted);
+    font-size: 11px;
+}
+
+.hero-card,
+.trading-panel {
+    background: linear-gradient(145deg, #131d30, #0e1523);
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    padding: 26px;
+    box-shadow: 0 25px 70px #00000025;
+}
+
+.card-heading,
+.chart-info,
+.chart-footer,
+.balance-line {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+}
+
+.card-heading small,
+.chart-info small {
+    color: var(--muted);
+    font-size: 10px;
+}
+
+.card-heading h3 {
+    margin-top: 4px;
+    font-size: 17px;
+}
+
+.live-dot {
+    font-size: 10px;
+    color: var(--green);
+}
+
+.chart-info {
+    margin-top: 35px;
+}
+
+.chart-info h2 {
+    font-size: 31px;
+    margin-top: 5px;
+}
+
+.positive {
+    color: var(--green);
+    font-size: 12px;
+}
+
+.chart-container {
+    position: relative;
+    height: 190px;
+    margin-top: 22px;
+}
+
+.chart-footer {
+    border-top: 1px solid var(--border);
+    padding-top: 17px;
+    margin-top: 15px;
+    color: var(--muted);
+    font-size: 10px;
+}
+
+.stats {
+    padding: 30px 7%;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    background: #0d1422;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+}
+
+.stats > div {
+    text-align: center;
+    padding: 15px;
+    border-right: 1px solid var(--border);
+}
+
+.stats > div:last-child {
+    border-right: none;
+}
+
+.stats h2 {
+    font-size: 26px;
+    color: #a78bfa;
+}
+
+.stats p {
+    color: var(--muted);
+    font-size: 12px;
+}
+
+.section {
+    padding: 95px 7%;
+}
+
+.section-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+    gap: 20px;
+    margin-bottom: 35px;
+}
+
+.section-heading h2,
+.trading-text h2,
+.account-section h2 {
+    font-size: clamp(28px, 3vw, 40px);
+    letter-spacing: -1.5px;
+    margin: 10px 0;
+}
+
+.section-heading p {
+    color: var(--muted);
+    font-size: 13px;
+}
+
+.demo-label {
+    color: #ffc76a;
+    font-size: 11px;
+}
+
+.market-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 17px;
+}
+
+.market-card {
+    background: var(--panel);
+    padding: 22px;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    transition: 0.25s;
+}
+
+.market-card:hover,
+.lesson-card:hover {
+    transform: translateY(-4px);
+    border-color: #9366ff77;
+}
+
+.pair {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 28px;
+}
+
+.currency-icon {
+    display: grid;
+    place-items: center;
+    width: 42px;
+    height: 42px;
+    border-radius: 10px;
+    background: #9366ff20;
+    color: #bba7ff;
+    font-size: 12px;
+    font-weight: 800;
+}
+
+.pair h3 {
+    font-size: 13px;
+}
+
+.pair p,
+.muted {
+    color: var(--muted);
+    font-size: 10px;
+}
+
+.market-card > h2 {
+    font-size: 23px;
+}
+
+.trading-section {
+    padding: 80px 7%;
+    background: #0d1422;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    display: grid;
+    grid-template-columns: 1fr 0.8fr;
+    align-items: center;
+    gap: 80px;
+}
+
+.trading-text > p {
+    margin-top: 18px;
+}
+
+.trading-text ul {
+    list-style: none;
+    color: #c7d1e1;
+    font-size: 13px;
+    line-height: 2.6;
+    margin-bottom: 25px;
+}
+
+.trading-panel > p:first-of-type {
+    color: var(--muted);
+    font-size: 12px;
+    margin-top: 28px;
+}
+
+.trading-panel > h2 {
+    font-size: 36px;
+    margin: 5px 0 25px;
+}
+
+.balance-line {
+    padding: 14px 0;
+    border-top: 1px solid var(--border);
+    font-size: 12px;
+}
+
+.balance-line span {
+    color: var(--muted);
+}
+
+.balance-line strong {
+    font-weight: 600;
+}
+
+.trading-panel .muted {
+    margin-top: 20px;
+    line-height: 1.8;
+}
+
+.academy-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+.lesson-card {
+    background: var(--panel);
+    padding: 28px;
+    border: 1px solid var(--border);
+    border-radius: 13px;
+    transition: 0.25s;
+}
+
+.lesson-number {
+    color: #a78bfa;
+    font-size: 12px;
+    font-weight: 800;
+}
+
+.lesson-card h3 {
+    margin: 17px 0 10px;
+    font-size: 17px;
+}
+
+.lesson-card p {
+    color: var(--muted);
+    font-size: 12px;
+    margin-bottom: 22px;
+}
+
+.lesson-card a {
+    color: #bba7ff;
+    font-size: 12px;
+}
+
+.account-section {
+    padding: 80px 7%;
+    text-align: center;
+    background: radial-gradient(ellipse at center, #39236b38, transparent 70%);
+}
+
+.account-section > p {
+    margin: 0 auto 25px;
+}
+
+.account-section .muted {
+    margin-top: 22px;
+    font-size: 10px;
+}
+
+.about-section {
+    padding: 45px 7%;
+    border-top: 1px solid var(--border);
+}
+
+.about-section h2 {
+    font-size: 19px;
+    margin-bottom: 12px;
+}
+
+.about-section p {
+    max-width: 750px;
+    color: var(--muted);
+    font-size: 12px;
+}
+
+footer {
+    text-align: center;
+    padding: 35px 7%;
+    background: #060a12;
+    border-top: 1px solid var(--border);
+}
+
+footer > p {
+    color: var(--muted);
+    font-size: 11px;
+    margin-top: 12px;
+}
+
+footer .footer-note {
+    max-width: 650px;
+    margin: 15px auto;
+    line-height: 1.8;
+}
+
+@media (max-width: 1000px) {
+    .hero {
+        gap: 35px;
+    }
+
+    .market-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .trading-section {
+        gap: 35px;
+    }
+
+    .navbar nav {
+        gap: 15px;
+    }
+}
+
+@media (max-width: 720px) {
+    .navbar {
+        padding: 20px 5%;
+        flex-wrap: wrap;
+    }
+
+    .navbar nav {
+        order: 3;
+        width: 100%;
+        justify-content: space-between;
+        gap: 10px;
+    }
+
+    .navbar nav a {
+        font-size: 11px;
+    }
+
+    .nav-buttons {
+        gap: 12px;
+        font-size: 11px;
+    }
+
+    .hero {
+        padding: 65px 5%;
+        grid-template-columns: 1fr;
+    }
+
+    .hero h1 {
+        letter-spacing: -2px;
+    }
+
+    .stats {
+        grid-template-columns: repeat(2, 1fr);
+        padding: 20px 5%;
+    }
+
+    .stats > div:nth-child(2) {
+        border-right: none;
+    }
+
+    .stats > div:nth-child(1),
+    .stats > div:nth-child(2) {
+        border-bottom: 1px solid var(--border);
+    }
+
+    .section {
+        padding: 65px 5%;
+    }
+
+    .section-heading {
+        align-items: start;
+        flex-direction: column;
+    }
+
+    .market-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .trading-section {
+        padding: 65px 5%;
+        grid-template-columns: 1fr;
+    }
+
+    .academy-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .account-section {
+        padding: 65px 5%;
+    }
+}

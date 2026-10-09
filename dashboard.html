@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dashboard | BIXBERRY FX</title>
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/features.css">
+</head>
+<body class="feature-page">
+
+<main class="dashboard-page">
+  <section class="page-heading">
+    <p class="eyebrow">YOUR TRADING SPACE</p>
+    <h1>Trading Dashboard</h1>
+    <p>Welcome to your BIXBERRY FX demo dashboard.</p>
+    <span class="demo-badge">DEMO ACCOUNT · VIRTUAL MONEY</span>
+  </section>
+
+  <section class="dashboard-stats">
+    <article class="stat-card">
+      <span>Demo Balance</span>
+      <h2 id="dash-balance">$10,000.00</h2>
+      <p>Virtual funds only</p>
+    </article>
+
+    <article class="stat-card">
+      <span>Open Positions</span>
+      <h2 id="dash-positions">0</h2>
+      <p>Demo trades</p>
+    </article>
+
+    <article class="stat-card">
+      <span>Account Type</span>
+      <h2>Practice</h2>
+      <p>Not a real brokerage account</p>
+    </article>
+  </section>
+
+  <section class="dashboard-panel">
+    <div>
+      <p class="eyebrow">GET STARTED</p>
+      <h2>Explore your trading tools</h2>
+      <p>Learn about currency markets and practise with virtual money.</p>
+    </div>
+
+    <div class="dashboard-links">
+      <a class="dashboard-link" href="markets.html">
+        <span>📈</span>
+        <div><strong>Forex Markets</strong><p>Explore currency exchange rates.</p></div>
+      </a>
+
+      <a class="dashboard-link" href="index.html#demo-trading">
+        <span>💱</span>
+        <div><strong>Demo Trading</strong><p>Practise on the homepage simulator.</p></div>
+      </a>
+
+      <a class="dashboard-link" href="academy.html">
+        <span>🎓</span>
+        <div><strong>Forex Academy</strong><p>Learn Forex from the beginning.</p></div>
+      </a>
+
+      <a class="dashboard-link" href="index.html">
+        <span>🏠</span>
+        <div><strong>Home</strong><p>Return to BIXBERRY FX.</p></div>
+      </a>
+    </div>
+  </section>
+
+  <section class="dashboard-panel">
+    <p class="eyebrow">TRADING REMINDER</p>
+    <h2>Learn before you trade</h2>
+    <p>Forex trading involves substantial risk. This dashboard is a learning prototype and does not place real trades.</p>
+  </section>
+</main>
+
+<style>
+.dashboard-page{max-width:1150px;margin:0 auto;padding:45px 22px 80px;color:#f5f5ff}
+.page-heading{margin-bottom:30px}
+.eyebrow{color:#a88bff;font-size:.78rem;letter-spacing:2px;font-weight:700}
+.page-heading h1{font-size:clamp(2rem,5vw,3.4rem);margin:10px 0}
+.page-heading>p:not(.eyebrow){color:#b7b6cb}
+.demo-badge{display:inline-block;margin-top:12px;padding:8px 12px;border:1px solid #7154d8;border-radius:20px;color:#c8baff;font-size:.78rem}
+.dashboard-stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:18px;margin:28px 0}
+.stat-card,.dashboard-panel{background:#15152a;border:1px solid #2d2b49;border-radius:18px;padding:24px;margin-bottom:20px}
+.stat-card span{color:#b7b6cb;font-size:.9rem}
+.stat-card h2{font-size:1.8rem;margin:14px 0 8px;overflow-wrap:anywhere}
+.stat-card p,.dashboard-panel>div>p:not(.eyebrow),.dashboard-link p{color:#aaa9c2;font-size:.9rem;line-height:1.6}
+.dashboard-panel h2{margin-top:8px}
+.dashboard-links{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px;margin-top:24px}
+.dashboard-link{display:flex;align-items:flex-start;gap:14px;padding:17px;background:#1c1b35;border:1px solid #373454;border-radius:13px;text-decoration:none;color:#fff;transition:transform .2s,border-color .2s}
+.dashboard-link:hover{transform:translateY(-3px);border-color:#9b7bff}
+.dashboard-link>span{font-size:1.6rem}
+.dashboard-link strong{display:block;margin-bottom:6px}
+.dashboard-link p{margin:0}
+</style>
+
+<script>
+(function(){
+  const balance=document.getElementById("dash-balance");
+  const positions=document.getElementById("dash-positions");
+  if(balance){
+    const saved=localStorage.getItem("bixberryDemoBalance");
+    if(saved && Number.isFinite(Number(saved))){
+      balance.textContent="$"+Number(saved).toLocaleString("en-US",{minimumFractionDigits:2,maximumFractionDigits:2});
+    }
+  }
+  if(positions){
+    const savedPositions=localStorage.getItem("bixberryDemoPositions");
+    if(savedPositions){
+      try{
+        const parsed=JSON.parse(savedPositions);
+        if(Array.isArray(parsed)) positions.textContent=parsed.length;
+      }catch(error){}
+    }
+  }
+})();
+</script>
+
+  <script type="module" src="js/dashboard-auth.js"></script>
+</body>
+</html>

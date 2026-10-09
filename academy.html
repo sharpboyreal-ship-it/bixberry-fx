@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Forex Academy | BIXBERRY FX</title>
+  <style>
+    *{box-sizing:border-box}
+    body{margin:0;background:#0b0b18;color:#f5f5ff;font-family:Arial,sans-serif}
+    header{padding:22px 7%;display:flex;justify-content:space-between;align-items:center;gap:15px;flex-wrap:wrap;border-bottom:1px solid #292642}
+    .logo{font-size:24px;font-weight:800;color:#ad91ff}
+    nav{display:flex;gap:18px;flex-wrap:wrap}
+    nav a{color:#dedaf3;text-decoration:none}
+    nav a:hover{color:#ad91ff}
+    main{max-width:1100px;margin:auto;padding:45px 22px 80px}
+    .hero{padding:35px 0}
+    .eyebrow{color:#ad91ff;font-weight:bold;letter-spacing:2px;font-size:13px}
+    h1{font-size:clamp(36px,6vw,60px);margin:15px 0}
+    h2{margin-top:0}
+    p{color:#b9b7cd;line-height:1.8}
+    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:18px}
+    .card,.quiz{background:#15152a;border:1px solid #302d4d;border-radius:16px;padding:24px}
+    .number{color:#ad91ff;font-size:14px;font-weight:bold}
+    .button{display:inline-block;background:#8a63ed;color:white;border:0;border-radius:8px;padding:12px 18px;text-decoration:none;cursor:pointer;font-weight:bold}
+    .button:hover{background:#7046d5}
+    .lesson-content{display:none;margin-top:16px;padding-top:12px;border-top:1px solid #373451}
+    .lesson-content.open{display:block}
+    .quiz{margin-top:35px}
+    .question{padding:15px 0;border-bottom:1px solid #302d4d}
+    label{display:block;margin:12px 0;color:#dedaf3;cursor:pointer}
+    input[type=radio]{margin-right:8px}
+    #quiz-result{font-weight:bold;color:#c5b2ff;margin-top:20px}
+    footer{text-align:center;padding:25px;border-top:1px solid #292642;color:#aaa9c2}
+  </style>
+</head>
+<body>
+<header>
+  <a class="logo" href="index.html" style="text-decoration:none">BIXBERRY FX</a>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="markets.html">Markets</a>
+    <a href="dashboard.html">Dashboard</a>
+    <a href="login.html">Login</a>
+  </nav>
+</header>
+
+<main>
+  <section class="hero">
+    <p class="eyebrow">BIXBERRY FX EDUCATION</p>
+    <h1>Master the basics of Forex.</h1>
+    <p>Learn how currency markets work, understand risk, and test your knowledge at your own pace.</p>
+  </section>
+
+  <section>
+    <h2>📚 Your learning path</h2>
+    <div class="grid">
+      <article class="card">
+        <span class="number">LESSON 01</span>
+        <h2>What is Forex?</h2>
+        <p>Understand the world's foreign exchange market.</p>
+        <button class="button" onclick="toggleLesson(1)">Study lesson</button>
+        <div class="lesson-content" id="lesson-1">
+          <p>Forex means foreign exchange. It involves exchanging one currency for another. For example, EUR/USD represents the euro against the US dollar.</p>
+          <p>Currency prices can rise or fall due to economic news, interest rates, and market demand.</p>
+        </div>
+      </article>
+
+      <article class="card">
+        <span class="number">LESSON 02</span>
+        <h2>Currency pairs</h2>
+        <p>Learn to read pairs such as EUR/USD and GBP/USD.</p>
+        <button class="button" onclick="toggleLesson(2)">Study lesson</button>
+        <div class="lesson-content" id="lesson-2">
+          <p>The first currency is the base currency. The second is the quote currency.</p>
+          <p>If EUR/USD is 1.1000, one euro is worth 1.10 US dollars at that quoted rate. The rate available to you may differ.</p>
+        </div>
+      </article>
+
+      <article class="card">
+        <span class="number">LESSON 03</span>
+        <h2>Risk management</h2>
+        <p>Understand why protecting your money matters.</p>
+        <button class="button" onclick="toggleLesson(3)">Study lesson</button>
+        <div class="lesson-content" id="lesson-3">
+          <p>Forex trading can result in significant losses. Leverage magnifies both gains and losses.</p>
+          <p>Learn about position sizing, stop-loss orders, and risk-to-reward ratios before considering real trading. A stop-loss cannot guarantee a particular exit price in all market conditions.</p>
+        </div>
+      </article>
+
+      <article class="card">
+        <span class="number">LESSON 04</span>
+        <h2>Charts and trends</h2>
+        <p>Discover how traders study price movements.</p>
+        <button class="button" onclick="toggleLesson(4)">Study lesson</button>
+        <div class="lesson-content" id="lesson-4">
+          <p>Candlestick charts display price movement over a chosen period. Traders may study trends, support, resistance, and volatility.</p>
+          <p>Charts cannot predict the future with certainty. Always consider risk and avoid relying on a single indicator.</p>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section class="quiz">
+    <p class="eyebrow">KNOWLEDGE CHECK</p>
+    <h2>🧠 Test your Forex knowledge</h2>
+    <form id="quiz-form">
+      <div class="question">
+        <p><strong>1. What does Forex mean?</strong></p>
+        <label><input type="radio" name="q1" value="a"> Foreign exchange</label>
+        <label><input type="radio" name="q1" value="b"> Foreign export tax</label>
+        <label><input type="radio" name="q1" value="c"> Fixed external rate</label>
+      </div>
+      <div class="question">
+        <p><strong>2. What does EUR/USD represent?</strong></p>
+        <label><input type="radio" name="q2" value="a"> Two stock market indexes</label>
+        <label><input type="radio" name="q2" value="b"> The euro against the US dollar</label>
+        <label><input type="radio" name="q2" value="c"> The British pound against the yen</label>
+      </div>
+      <div class="question">
+        <p><strong>3. What can leverage do?</strong></p>
+        <label><input type="radio" name="q3" value="a"> Remove all trading risk</label>
+        <label><input type="radio" name="q3" value="b"> Guarantee a profit</label>
+        <label><input type="radio" name="q3" value="c"> Magnify gains and losses</label>
+      </div>
+      <button class="button" type="submit">Check my answers</button>
+    </form>
+    <p id="quiz-result" role="status"></p>
+  </section>
+</main>
+
+<footer>
+  <p>© 2026 BIXBERRY FX · Educational content only. Not financial advice.</p>
+</footer>
+
+<script>
+function toggleLesson(number){
+  const lesson=document.getElementById("lesson-"+number);
+  lesson.classList.toggle("open");
+}
+document.getElementById("quiz-form").addEventListener("submit",function(event){
+  event.preventDefault();
+  const answers={q1:"a",q2:"b",q3:"c"};
+  let score=0;
+  let unanswered=0;
+  for(const [question,correct] of Object.entries(answers)){
+    const selected=document.querySelector('input[name="'+question+'"]:checked');
+    if(!selected) unanswered++;
+    else if(selected.value===correct) score++;
+  }
+  const result=document.getElementById("quiz-result");
+  if(unanswered){
+    result.textContent="Please answer all three questions before checking your score.";
+  }else{
+    result.textContent="Your score: "+score+"/3. "+(score===3?"Excellent work! 🎉":"Review the lessons and try again!");
+  }
+});
+</script>
+</body>
+</html>

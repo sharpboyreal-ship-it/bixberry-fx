@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Markets | BIXBERRY FX</title>
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/features.css">
+<script src="js/features.js" defer></script>
+</head>
+<body class="feature-page">
+<main class="feature-container">
+<a class="logo" href="index.html">BIXBERRY<span>FX</span></a>
+<div class="feature-links">
+<a href="index.html">Home</a>
+<a href="dashboard.html">Dashboard</a>
+<a href="login.html">Login</a>
+<a href="academy.html">Academy</a>
+</div>
+
+<h1>Currency Markets</h1>
+<p>Explore currency exchange reference rates.</p>
+
+<div class="feature-box">
+<h2>Exchange Rates</h2>
+<p id="market-updated">Fetching reference rates...</p>
+<div style="overflow-x:auto">
+<table class="feature-table">
+<thead>
+<tr><th>Pair</th><th>Rate</th><th>Type</th></tr>
+</thead>
+<tbody id="market-data">
+<tr><td colspan="3">Loading...</td></tr>
+</tbody>
+</table>
+</div>
+<p>Rates are reference data and may be delayed. They are not executable forex quotes.</p>
+<button class="feature-button" onclick="loadReferenceRates()">Refresh Rates</button>
+</div>
+</main>
+</body>
+</html>
