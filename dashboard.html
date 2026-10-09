@@ -180,6 +180,11 @@
       .value { font-size: 20px; }
     }
   </style>
+
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icons/icon.svg" type="image/svg+xml">
+<meta name="theme-color" content="#080b16">
+
 </head>
 <body>
 <div class="layout">
@@ -190,6 +195,8 @@
       <a href="index.html">Home</a>
       <a href="markets.html">Markets</a>
       <a href="academy.html">Forex Academy</a>
+    
+      <a href="calendar.html">Economic Calendar</a>
     </nav>
     <p class="small">Guest access · Demo account</p>
   </aside>
@@ -297,5 +304,16 @@
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="js/demo-trading.js"></script>
+
+<script>
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", () => {
+    navigator.serviceWorker.register("./sw.js")
+      .then(() => console.log("BIXBERRY FX offline support enabled."))
+      .catch(error => console.error("App setup error:", error));
+  });
+}
+</script>
+
 </body>
 </html>

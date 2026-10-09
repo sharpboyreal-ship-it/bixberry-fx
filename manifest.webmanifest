@@ -1,0 +1,19 @@
+{
+  "id": "./",
+  "name": "BIXBERRY FX",
+  "short_name": "BIXBERRY FX",
+  "description": "Learn forex, explore currency reference rates, and practise trading with virtual money.",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#080b16",
+  "theme_color": "#080b16",
+  "icons": [
+    {
+      "src": "icons/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}

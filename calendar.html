@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Explore important economic announcements and learn how they can affect forex markets with BIXBERRY FX.">
+<title>Economic Calendar | BIXBERRY FX</title>
+
+<style>
+:root {
+  --bg: #080b16;
+  --panel: #11182a;
+  --border: #26314b;
+  --text: #f4f7ff;
+  --muted: #a6b1ca;
+  --green: #31e6a1;
+  --purple: #8b5cf6;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+}
+
+a { text-decoration: none; }
+
+header {
+  padding: 20px 7%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 20px;
+  background: #0b1020;
+  border-bottom: 1px solid var(--border);
+}
+
+.logo {
+  color: white;
+  font-size: 22px;
+  font-weight: 800;
+}
+
+.logo span { color: var(--green); }
+
+nav {
+  display: flex;
+  gap: 17px;
+  flex-wrap: wrap;
+}
+
+nav a { color: var(--muted); }
+nav a:hover { color: var(--green); }
+
+.hero {
+  padding: 65px 7% 45px;
+  background: radial-gradient(ellipse at top right, #292052, transparent 65%);
+}
+
+.tag {
+  color: var(--green);
+  font-size: 13px;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
+h1 {
+  font-size: clamp(34px, 5vw, 52px);
+  line-height: 1.15;
+  margin: 15px 0;
+}
+
+.hero p {
+  color: var(--muted);
+  max-width: 720px;
+}
+
+main {
+  max-width: 1150px;
+  margin: auto;
+  padding: 35px 20px 65px;
+}
+
+h2 { font-size: 27px; }
+
+.intro { color: var(--muted); }
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 18px;
+  margin: 25px 0 45px;
+}
+
+.card {
+  padding: 23px;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+}
+
+.card h3 { margin-top: 0; }
+
+.card p { color: var(--muted); }
+
+.badge {
+  display: inline-block;
+  padding: 5px 10px;
+  border-radius: 6px;
+  background: #202b43;
+  color: var(--green);
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.button {
+  display: inline-block;
+  margin-top: 12px;
+  padding: 12px 17px;
+  background: var(--green);
+  color: #07130f;
+  font-weight: bold;
+  border-radius: 8px;
+}
+
+.resource {
+  display: block;
+  margin-top: 12px;
+  padding: 17px;
+  border: 1px solid var(--border);
+  background: var(--panel);
+  border-radius: 10px;
+  color: var(--text);
+}
+
+.resource:hover { border-color: var(--green); }
+
+.resource span {
+  display: block;
+  color: var(--muted);
+  font-size: 14px;
+  margin-top: 4px;
+}
+
+.warning {
+  padding: 20px;
+  border: 1px solid #6b4b26;
+  background: #251c12;
+  color: #f4d6a4;
+  border-radius: 12px;
+}
+
+footer {
+  border-top: 1px solid var(--border);
+  padding: 25px 7%;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+@media(max-width:600px) {
+  header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  nav { gap: 12px; }
+
+  .hero { padding-top: 45px; }
+}
+</style>
+
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icons/icon.svg" type="image/svg+xml">
+<meta name="theme-color" content="#080b16">
+
+</head>
+
+<body>
+<header>
+  <a class="logo" href="index.html">BIXBERRY <span>FX</span></a>
+
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="markets.html">Markets</a>
+    <a href="dashboard.html">Demo Trading</a>
+    <a href="academy.html">Academy</a>
+    <a href="calculator.html">Calculator</a>
+    <a href="calendar.html">Economic Calendar</a>
+  </nav>
+</header>
+
+<section class="hero">
+  <span class="tag">FOREX MARKET INTELLIGENCE</span>
+  <h1>Understand the news that moves <span style="color:#31e6a1">markets.</span></h1>
+  <p>
+    Learn about major economic announcements, understand why traders watch
+    them, and find external economic calendars for current event schedules.
+  </p>
+  <a class="button" href="#calendar-resources">Explore Calendar Resources →</a>
+</section>
+
+<main>
+  <section>
+    <h2>Important Economic Indicators</h2>
+    <p class="intro">
+      These announcements can influence currencies. Their impact depends on
+      market expectations, the published results, and wider economic conditions.
+    </p>
+
+    <div class="grid">
+      <article class="card">
+        <span class="badge">EMPLOYMENT</span>
+        <h3>US Nonfarm Payrolls</h3>
+        <p>
+          Measures changes in US employment outside certain categories.
+          Traders watch it for clues about economic strength and Federal Reserve policy.
+        </p>
+      </article>
+
+      <article class="card">
+        <span class="badge">INFLATION</span>
+        <h3>Consumer Price Index</h3>
+        <p>
+          Tracks changes in consumer prices. Unexpected inflation figures
+          can change expectations about future interest rates.
+        </p>
+      </article>
+
+      <article class="card">
+        <span class="badge">CENTRAL BANKS</span>
+        <h3>Interest Rate Decisions</h3>
+        <p>
+          Decisions and statements from central banks can influence currency
+          values through changes in interest-rate expectations.
+        </p>
+      </article>
+
+      <article class="card">
+        <span class="badge">ECONOMIC GROWTH</span>
+        <h3>Gross Domestic Product</h3>
+        <p>
+          GDP measures the value of goods and services produced in an economy.
+          Growth figures can influence expectations about economic health.
+        </p>
+      </article>
+
+      <article class="card">
+        <span class="badge">CONSUMER ACTIVITY</span>
+        <h3>Retail Sales</h3>
+        <p>
+          Provides information about consumer spending. Strong or weak results
+          can affect expectations for economic growth.
+        </p>
+      </article>
+
+      <article class="card">
+        <span class="badge">BUSINESS ACTIVITY</span>
+        <h3>PMI Reports</h3>
+        <p>
+          Purchasing Managers' Index surveys provide information about activity
+          in manufacturing and services. Readings are interpreted in context.
+        </p>
+      </article>
+    </div>
+  </section>
+
+  <section id="calendar-resources">
+    <h2>Find Current Economic Events</h2>
+    <p class="intro">
+      Use these external resources to check published schedules, event times,
+      forecasts, previous results, and actual releases.
+    </p>
+
+    <a class="resource"
+       href="https://www.forexfactory.com/calendar"
+       target="_blank" rel="noopener noreferrer">
+      <strong>Forex Factory Economic Calendar ↗</strong>
+      <span>Review scheduled economic announcements and reported results.</span>
+    </a>
+
+    <a class="resource"
+       href="https://www.investing.com/economic-calendar/"
+       target="_blank" rel="noopener noreferrer">
+      <strong>Investing.com Economic Calendar ↗</strong>
+      <span>Explore economic indicators, forecasts, and historical releases.</span>
+    </a>
+
+    <a class="resource"
+       href="https://www.cmegroup.com/markets/interest-rates/cme-fedwatch-tool.html"
+       target="_blank" rel="noopener noreferrer">
+      <strong>CME FedWatch Tool ↗</strong>
+      <span>Explore market-implied probabilities for Federal Reserve rate decisions.</span>
+    </a>
+  </section>
+
+  <section style="margin-top:40px">
+    <h2>How to Read an Economic Release</h2>
+
+    <div class="grid">
+      <article class="card">
+        <h3>1. Previous</h3>
+        <p>The previously reported figure provides historical context.</p>
+      </article>
+
+      <article class="card">
+        <h3>2. Forecast</h3>
+        <p>The forecast represents an expectation before the new data is released.</p>
+      </article>
+
+      <article class="card">
+        <h3>3. Actual</h3>
+        <p>Compare the published figure with expectations. Markets may react differently depending on context.</p>
+      </article>
+    </div>
+  </section>
+
+  <div class="warning">
+    <strong>Risk warning:</strong>
+    Economic announcements can cause sharp price movements, wider spreads,
+    and slippage. This page is educational and does not provide personalized
+    financial advice or guarantee trading results. Event schedules and times
+    should be verified with the external provider.
+  </div>
+</main>
+
+<footer>
+  © 2026 BIXBERRY FX · Learn carefully. Practice responsibly.
+</footer>
+
+<script>
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", () => {
+    navigator.serviceWorker.register("./sw.js")
+      .then(() => console.log("BIXBERRY FX offline support enabled."))
+      .catch(error => console.error("App setup error:", error));
+  });
+}
+</script>
+
+</body>
+</html>

@@ -243,6 +243,11 @@
       .hero { padding: 45px 18px; }
     }
   </style>
+
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icons/icon.svg" type="image/svg+xml">
+<meta name="theme-color" content="#080b16">
+
 </head>
 
 <body>
@@ -253,7 +258,9 @@
     <a href="markets.html">Markets</a>
     <a href="dashboard.html">Demo Trading</a>
     <a href="academy.html">Academy</a>
-  </nav>
+  
+      <a href="calendar.html">Economic Calendar</a>
+    </nav>
 </header>
 
 <main>
@@ -403,5 +410,16 @@
   <p>BIXBERRY FX · Educational market information and simulated trading.</p>
   <p>Demo trades use virtual funds. Reference rates and illustrative charts are not live execution prices.</p>
 </footer>
+
+<script>
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", () => {
+    navigator.serviceWorker.register("./sw.js")
+      .then(() => console.log("BIXBERRY FX offline support enabled."))
+      .catch(error => console.error("App setup error:", error));
+  });
+}
+</script>
+
 </body>
 </html>

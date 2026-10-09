@@ -169,6 +169,11 @@
       .hero { padding-top: 50px; }
     }
   </style>
+
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icons/icon.svg" type="image/svg+xml">
+<meta name="theme-color" content="#080b16">
+
 </head>
 <body>
   <header>
@@ -178,6 +183,8 @@
       <a href="markets.html">Markets</a>
       <a href="dashboard.html">Demo Trading</a>
       <a class="active" href="academy.html">Academy</a>
+    
+      <a href="calendar.html">Economic Calendar</a>
     </nav>
   </header>
 
@@ -383,6 +390,17 @@
     document.getElementById("quiz-feedback").textContent = "";
   });
 })();
+</script>
+
+
+<script>
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", () => {
+    navigator.serviceWorker.register("./sw.js")
+      .then(() => console.log("BIXBERRY FX offline support enabled."))
+      .catch(error => console.error("App setup error:", error));
+  });
+}
 </script>
 
 </body>

@@ -61,6 +61,11 @@ button{
 .warning{margin-top:25px;padding:17px;border:1px solid #6b4b26;background:#251c12;border-radius:10px;color:#f4d6a4}
 @media(max-width:700px){.layout{grid-template-columns:1fr}header{align-items:flex-start;flex-direction:column}}
 </style>
+
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icons/icon.svg" type="image/svg+xml">
+<meta name="theme-color" content="#080b16">
+
 </head>
 <body>
 <header>
@@ -71,7 +76,9 @@ button{
     <a href="dashboard.html">Demo Trading</a>
     <a href="academy.html">Academy</a>
     <a href="calculator.html">Calculator</a>
-  </nav>
+  
+      <a href="calendar.html">Economic Calendar</a>
+    </nav>
 </header>
 
 <main>
@@ -209,5 +216,16 @@ $("pair").addEventListener("change", () => {
 
 calculate();
 </script>
+
+<script>
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", () => {
+    navigator.serviceWorker.register("./sw.js")
+      .then(() => console.log("BIXBERRY FX offline support enabled."))
+      .catch(error => console.error("App setup error:", error));
+  });
+}
+</script>
+
 </body>
 </html>
