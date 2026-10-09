@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Forex Calculator | BIXBERRY FX</title>
+<style>
+:root {
+  --bg:#080b16;
+  --panel:#11182a;
+  --border:#26314b;
+  --text:#f4f7ff;
+  --muted:#a6b1ca;
+  --green:#31e6a1;
+  --purple:#8b5cf6;
+}
+*{box-sizing:border-box}
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--text);
+  font-family:Arial,sans-serif;
+  line-height:1.6
+}
+header{
+  padding:20px 7%;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:20px;
+  flex-wrap:wrap;
+  background:#0b1020;
+  border-bottom:1px solid var(--border)
+}
+.logo{font-size:22px;font-weight:800;text-decoration:none;color:white}
+.logo span{color:var(--green)}
+nav{display:flex;gap:18px;flex-wrap:wrap}
+nav a{color:var(--muted);text-decoration:none}
+nav a:hover{color:var(--green)}
+main{max-width:950px;margin:45px auto;padding:0 20px 50px}
+.tag{color:var(--green);font-size:13px;font-weight:bold}
+h1{font-size:clamp(32px,5vw,48px);margin:10px 0}
+.intro{color:var(--muted);max-width:700px}
+.layout{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:30px}
+.card{background:var(--panel);border:1px solid var(--border);padding:24px;border-radius:15px}
+label{display:block;font-size:14px;margin:15px 0 7px;color:var(--muted)}
+input,select{
+  width:100%;padding:13px;border-radius:8px;
+  background:#080b16;color:var(--text);
+  border:1px solid var(--border);font-size:16px
+}
+button{
+  width:100%;padding:14px;margin-top:22px;border:0;
+  border-radius:8px;background:var(--green);
+  color:#07130f;font-weight:bold;font-size:16px;cursor:pointer
+}
+.result{margin:15px 0;padding:15px;background:#080b16;border-radius:10px}
+.result small{color:var(--muted)}
+.result strong{display:block;font-size:24px;margin-top:5px}
+.note{font-size:13px;color:var(--muted)}
+.warning{margin-top:25px;padding:17px;border:1px solid #6b4b26;background:#251c12;border-radius:10px;color:#f4d6a4}
+@media(max-width:700px){.layout{grid-template-columns:1fr}header{align-items:flex-start;flex-direction:column}}
+</style>
+</head>
+<body>
+<header>
+  <a class="logo" href="index.html">BIXBERRY <span>FX</span></a>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="markets.html">Markets</a>
+    <a href="dashboard.html">Demo Trading</a>
+    <a href="academy.html">Academy</a>
+    <a href="calculator.html">Calculator</a>
+  </nav>
+</header>
+
+<main>
+  <span class="tag">TRADING TOOLS</span>
+  <h1>Forex Trading Calculator</h1>
+  <p class="intro">Estimate a trade's potential profit or loss using your entry price, exit price, position size, and direction. No account required.</p>
+
+  <div class="layout">
+    <section class="card">
+      <h2>Trade Details</h2>
+
+      <label for="pair">Currency pair</label>
+      <select id="pair">
+        <option value="EURUSD">EUR/USD</option>
+        <option value="GBPUSD">GBP/USD</option>
+        <option value="AUDUSD">AUD/USD</option>
+        <option value="NZDUSD">NZD/USD</option>
+        <option value="USDJPY">USD/JPY</option>
+        <option value="USDCHF">USD/CHF</option>
+        <option value="USDCAD">USD/CAD</option>
+        <option value="EURGBP">EUR/GBP</option>
+      </select>
+
+      <label for="direction">Trade direction</label>
+      <select id="direction">
+        <option value="buy">BUY</option>
+        <option value="sell">SELL</option>
+      </select>
+
+      <label for="entry">Entry price</label>
+      <input id="entry" type="number" min="0.000001" step="any" value="1.1000">
+
+      <label for="exit">Exit price</label>
+      <input id="exit" type="number" min="0.000001" step="any" value="1.1050">
+
+      <label for="units">Position size (base currency units)</label>
+      <input id="units" type="number" min="1" step="any" value="10000">
+
+      <label for="costs">Estimated total trading costs (quote currency)</label>
+      <input id="costs" type="number" min="0" step="any" value="0">
+
+      <button id="calculate">Calculate Result</button>
+      <p class="note">This calculator assumes the profit currency is the pair's quote currency. It does not convert the result into your account currency.</p>
+    </section>
+
+    <section class="card">
+      <h2>Estimated Result</h2>
+
+      <div class="result">
+        <small>Gross profit / loss</small>
+        <strong id="gross">$0.00</strong>
+      </div>
+
+      <div class="result">
+        <small>Estimated result after costs</small>
+        <strong id="net">$0.00</strong>
+      </div>
+
+      <div class="result">
+        <small>Price movement</small>
+        <strong id="movement">0.0 pips</strong>
+      </div>
+
+      <div class="result">
+        <small>Position notional value</small>
+        <strong id="notional">—</strong>
+      </div>
+
+      <p id="message" class="note" aria-live="polite">Enter your trade details and calculate.</p>
+    </section>
+  </div>
+
+  <div class="warning">
+    <strong>Risk warning:</strong> This tool provides estimates for educational purposes. Actual results may differ because of spreads, slippage, commissions, financing charges, and currency conversion. Forex and leveraged trading can result in substantial losses.
+  </div>
+</main>
+
+<script>
+const $ = id => document.getElementById(id);
+
+function money(value) {
+  return value.toLocaleString("en-US", {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2
+  });
+}
+
+function calculate() {
+  const pair = $("pair").value;
+  const direction = $("direction").value;
+  const entry = Number($("entry").value);
+  const exit = Number($("exit").value);
+  const units = Number($("units").value);
+  const costs = Number($("costs").value);
+
+  if (
+    !Number.isFinite(entry) || entry <= 0 ||
+    !Number.isFinite(exit) || exit <= 0 ||
+    !Number.isFinite(units) || units <= 0 ||
+    !Number.isFinite(costs) || costs < 0
+  ) {
+    $("message").textContent = "Please enter valid positive prices and position size, and non-negative costs.";
+    return;
+  }
+
+  const rawMovement = (exit - entry) / (pair.endsWith("JPY") ? 0.01 : 0.0001);
+  const movement = direction === "buy" ? rawMovement : -rawMovement;
+  const gross = (direction === "buy" ? exit - entry : entry - exit) * units;
+  const net = gross - costs;
+  const notional = entry * units;
+
+  $("gross").textContent = money(gross) + " " + pair.slice(3);
+  $("net").textContent = money(net) + " " + pair.slice(3);
+  $("net").style.color = net >= 0 ? "#31e6a1" : "#ff7272";
+  $("gross").style.color = gross >= 0 ? "#31e6a1" : "#ff7272";
+  $("movement").textContent = movement.toFixed(1) + " pips";
+  $("notional").textContent = money(notional) + " " + pair.slice(0,3);
+  $("message").textContent = "Estimate calculated. Results exclude any costs you have not entered.";
+}
+
+$("calculate").addEventListener("click", calculate);
+$("pair").addEventListener("change", () => {
+  if ($("pair").value === "USDJPY") {
+    $("entry").value = "150.00";
+    $("exit").value = "150.50";
+  } else if ($("pair").value === "EURGBP") {
+    $("entry").value = "0.8500";
+    $("exit").value = "0.8550";
+  } else {
+    $("entry").value = "1.1000";
+    $("exit").value = "1.1050";
+  }
+  calculate();
+});
+
+calculate();
+</script>
+</body>
+</html>
